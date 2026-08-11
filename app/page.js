@@ -20,6 +20,9 @@ const BRAND           = "¡Afiliamos Ya!";
 const SMMLV = 1750905;
 const ARL_RATES = { I: 0.00522, II: 0.01044, III: 0.02436, IV: 0.0435, V: 0.0696 };
 
+// Redondea al múltiplo de 100 más cercano (como exige la PILA)
+const r100 = (n) => Math.round((n || 0) / 100) * 100;
+
 const cop = (n) =>
   new Intl.NumberFormat("es-CO", {
     style: "currency",
@@ -29,11 +32,11 @@ const cop = (n) =>
 
 function liquidar(ingresos, o) {
   const ibc = Math.max(ingresos * 0.4, SMMLV);
-  const salud = !o.exterior && o.salud ? ibc * 0.125 : 0; // exterior no aporta salud
-  const pension = o.pension ? ibc * 0.16 : 0;
-  const arl = o.arl ? ibc * ARL_RATES[o.riesgo] : 0;
-  const caja = o.caja ? ibc * o.cajaRate : 0; // 0.006 o 0.02, voluntaria
-  const fsp = o.pension && ibc >= 4 * SMMLV ? ibc * 0.01 : 0; // solidaridad pensional
+  const salud = !o.exterior && o.salud ? r100(ibc * 0.125) : 0; // exterior no aporta salud
+  const pension = o.pension ? r100(ibc * 0.16) : 0;
+  const arl = o.arl ? r100(ibc * ARL_RATES[o.riesgo]) : 0;
+  const caja = o.caja ? r100(ibc * o.cajaRate) : 0; // 0.006 o 0.02, voluntaria
+  const fsp = o.pension && ibc >= 4 * SMMLV ? r100(ibc * 0.01) : 0; // solidaridad pensional
   const total = salud + pension + arl + caja + fsp;
   return { ibc, salud, pension, arl, caja, fsp, total };
 }
