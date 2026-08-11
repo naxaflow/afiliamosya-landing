@@ -229,7 +229,7 @@ export default function App() {
             <div className="brand">
               <img src="/logo.png" alt="¡Afiliamos Ya!" style={{ height: 34, width: "auto" }} /> {BRAND}
             </div>
-            <div className="nav-auth">Agremiación autorizada · Min. Salud</div>
+            <div className="nav-auth">Con agremiación autorizada · Min. Salud</div>
           </nav>
 
           <div className="hero-grid">
@@ -263,8 +263,9 @@ export default function App() {
               <h3>La ARL no la da cualquiera.</h3>
               <p>
                 Ninguna app de autoliquidación puede afiliarte a riesgos
-                laborales. Solo una agremiación <b>autorizada por el Ministerio
-                de Salud</b> — como la nuestra — puede darte ARL colectiva.
+                laborales. Operamos a través de una agremiación <b>autorizada
+                por el Ministerio de Salud</b>, la única figura que puede darte
+                ARL colectiva.
               </p>
               <div className="big">+20<span style={{ fontSize: "1rem", color: "rgba(245,244,239,.7)" }}> años protegiendo independientes</span></div>
             </aside>
@@ -506,10 +507,10 @@ export default function App() {
       <section className="section" style={{ background: "var(--paper-2)" }}>
         <div className="wrap">
           <span className="eyebrow">Preguntas frecuentes</span>
-          <h2 style={{ marginTop: 10 }}>Lo que todo conductor pregunta</h2>
+          <h2 style={{ marginTop: 10 }}>Lo que todo independiente pregunta</h2>
           <div className="faq">
             {[
-              ["¿Me dan ARL de verdad?", "Sí. Como agremiación autorizada por el Ministerio de Salud podemos afiliarte a riesgos laborales de forma colectiva. Es algo que ninguna app de autoliquidación puede ofrecer."],
+              ["¿Me dan ARL de verdad?", "Sí. Operamos a través de una agremiación autorizada por el Ministerio de Salud, lo que nos permite afiliarte a riesgos laborales de forma colectiva. Es algo que ninguna app de autoliquidación puede ofrecer."],
               ["¿Cuánto pago al mes?", "Pagas tus aportes de ley (los que ves en la calculadora) más una cuota de administración por gestionarte todo. Te damos el valor exacto en tu cotización."],
               ["¿Qué es el IBC?", "Es la base sobre la que se calculan tus aportes. Para independientes es el 40% de tus ingresos, con un mínimo de 1 salario mínimo. Nosotros lo calculamos bien para que la UGPP no te haga requerimientos."],
               ["¿Qué pasa si dejo de pagar un mes?", "Puedes caer en mora, perder cobertura y acumular sanciones. Por eso te enviamos recordatorios y llevamos tu control mes a mes."],
@@ -545,7 +546,7 @@ export default function App() {
 
       <footer className="foot">
         <div className="wrap">
-          <span>{BRAND} · Agremiación autorizada por el Ministerio de Salud</span>
+          <span>{BRAND} · Operamos a través de una agremiación autorizada por el Ministerio de Salud</span>
           <span>
             Al escribirnos autorizas el tratamiento de tus datos conforme a la Ley 1581 de 2012.
           </span>
