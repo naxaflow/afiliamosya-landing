@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { parsePhoneNumberFromString, getCountryCallingCode } from 'libphonenumber-js'
 
 /**
@@ -8,8 +8,9 @@ import { parsePhoneNumberFromString, getCountryCallingCode } from 'libphonenumbe
  * Envía por fetch (POST) al endpoint seguro /api/leads, que inserta en Supabase
  * con la service_role key en el servidor (ninguna llave viaja al navegador).
  *
- * Teléfono internacional: selector de país (por defecto Colombia +57) + número.
- * Se valida con libphonenumber-js y se guarda en formato E.164 (ej. +573001234567).
+ * Teléfono internacional: selector de país con buscador (por defecto Colombia
+ * +57) + número. Se valida con libphonenumber-js y se guarda en formato E.164
+ * (ej. +573001234567).
  *
  * Reutiliza las clases globales de la landing (.field, .chk, .btn, .btn-wa) y
  * las variables de tema (--ink, --amber, --paper) para calzar con la calculadora.
@@ -47,6 +48,147 @@ const COUNTRIES = [
 // Bandera emoji a partir del código ISO de 2 letras (degrada a "CO" en Windows).
 const flag = (cc) =>
   cc.replace(/./g, (c) => String.fromCodePoint(127397 + c.charCodeAt(0)))
+const dial = (cc) => getCountryCallingCode(cc)
+// Normaliza para búsqueda sin acentos ni mayúsculas ("España" -> "espana").
+const norm = (s) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase()
+
+/**
+ * Selector de país personalizado (no <select> nativo) para poder mostrar:
+ * - cerrado: compacto "🇨🇴 +57"
+ * - abierto: buscador + lista con nombre completo "🇨🇴 Colombia (+57)"
+ */
+function CountrySelect({ value, onChange }) {
+  const [open, setOpen] = useState(false)
+  const [query, setQuery] = useState('')
+  const boxRef = useRef(null)
+
+  // Cerrar al hacer clic fuera.
+  useEffect(() => {
+    function onDocMouseDown(e) {
+      if (boxRef.current && !boxRef.current.contains(e.target)) {
+        setOpen(false)
+        setQuery('')
+      }
+    }
+    document.addEventListener('mousedown', onDocMouseDown)
+    return () => document.removeEventListener('mousedown', onDocMouseDown)
+  }, [])
+
+  const sel = COUNTRIES.find((c) => c.code === value) || COUNTRIES[0]
+  const q = norm(query.trim())
+  const lista = q
+    ? COUNTRIES.filter(
+        (c) =>
+          norm(c.name).includes(q) ||
+          norm(c.code).includes(q) ||
+          ('+' + dial(c.code)).includes(q) ||
+          dial(c.code).includes(q)
+      )
+    : COUNTRIES
+
+  return (
+    <div ref={boxRef} style={{ position: 'relative', flex: '0 0 auto' }}>
+      {/* Botón cerrado: bandera + código (compacto), estilo .field */}
+      <button
+        type="button"
+        className="field"
+        aria-label="Código de país"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen((o) => !o)}
+        style={{
+          width: 116,
+          display: 'flex',
+          alignItems: 'center',
+          gap: 6,
+          cursor: 'pointer',
+          textAlign: 'left',
+        }}
+      >
+        <span>{flag(sel.code)}</span>
+        <span>+{dial(sel.code)}</span>
+        <span style={{ marginLeft: 'auto', opacity: 0.6, fontSize: '.7rem' }}>▾</span>
+      </button>
+
+      {/* Panel abierto: buscador + lista con nombres completos */}
+      {open && (
+        <div
+          role="listbox"
+          style={{
+            position: 'absolute',
+            top: 'calc(100% + 4px)',
+            left: 0,
+            zIndex: 50,
+            width: 280,
+            background: '#12333a',
+            border: '1px solid rgba(245,244,239,.18)',
+            borderRadius: 12,
+            boxShadow: '0 14px 34px rgba(0,0,0,.45)',
+            padding: 8,
+          }}
+        >
+          <input
+            autoFocus
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Buscar país…"
+            className="field"
+            style={{ width: '100%', marginBottom: 6 }}
+          />
+          <div style={{ maxHeight: 240, overflowY: 'auto' }}>
+            {lista.map((c) => {
+              const activo = c.code === value
+              return (
+                <button
+                  key={c.code}
+                  type="button"
+                  role="option"
+                  aria-selected={activo}
+                  onClick={() => {
+                    onChange(c.code)
+                    setOpen(false)
+                    setQuery('')
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!activo) e.currentTarget.style.background = 'rgba(245,244,239,.08)'
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!activo) e.currentTarget.style.background = 'transparent'
+                  }}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    width: '100%',
+                    textAlign: 'left',
+                    background: activo ? 'rgba(242,167,27,.16)' : 'transparent',
+                    color: activo ? 'var(--amber)' : 'var(--paper)',
+                    border: 'none',
+                    borderRadius: 8,
+                    cursor: 'pointer',
+                    padding: '.55rem .6rem',
+                    fontSize: '.95rem',
+                    fontFamily: 'inherit',
+                  }}
+                >
+                  <span>{flag(c.code)}</span>
+                  <span style={{ flex: 1 }}>{c.name}</span>
+                  <span style={{ opacity: 0.7 }}>+{dial(c.code)}</span>
+                </button>
+              )
+            })}
+            {lista.length === 0 && (
+              <p style={{ color: 'rgba(245,244,239,.6)', fontSize: '.9rem', padding: '.55rem .6rem' }}>
+                Sin resultados
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function LeadForm() {
   const [estado, setEstado] = useState('idle') // 'idle' | 'enviando' | 'ok' | 'error'
@@ -119,7 +261,7 @@ export default function LeadForm() {
     color: 'rgba(245,244,239,.72)',
     margin: '18px 0 8px',
   }
-  // Opciones de los desplegables: texto oscuro sobre blanco para buen contraste.
+  // Opciones de los desplegables nativos: texto oscuro sobre blanco para contraste.
   const optionStyle = { color: '#0f272d', background: '#ffffff' }
 
   if (estado === 'ok') {
@@ -151,20 +293,8 @@ export default function LeadForm() {
 
           <label style={labelStyle}>Teléfono / WhatsApp *</label>
           <div style={{ display: 'flex', gap: 8 }}>
-            {/* Selector de código de país. Colombia (+57) por defecto. */}
-            <select
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-              className="field"
-              aria-label="Código de país"
-              style={{ flex: '0 0 auto', width: 132 }}
-            >
-              {COUNTRIES.map((c) => (
-                <option key={c.code} value={c.code} title={c.name} style={optionStyle}>
-                  {flag(c.code)} +{getCountryCallingCode(c.code)}
-                </option>
-              ))}
-            </select>
+            {/* Selector de país con buscador. Colombia (+57) por defecto. */}
+            <CountrySelect value={country} onChange={setCountry} />
             {/* Número nacional; se combina con el país para formar el E.164. */}
             <input
               type="tel"
