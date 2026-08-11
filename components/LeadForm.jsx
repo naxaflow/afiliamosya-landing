@@ -1,34 +1,82 @@
 'use client'
 
 import { useState } from 'react'
+import { parsePhoneNumberFromString, getCountryCallingCode } from 'libphonenumber-js'
 
 /**
  * Formulario de captura de leads de "¡Afiliamos Ya!".
  * Envía por fetch (POST) al endpoint seguro /api/leads, que inserta en Supabase
  * con la service_role key en el servidor (ninguna llave viaja al navegador).
  *
+ * Teléfono internacional: selector de país (por defecto Colombia +57) + número.
+ * Se valida con libphonenumber-js y se guarda en formato E.164 (ej. +573001234567).
+ *
  * Reutiliza las clases globales de la landing (.field, .chk, .btn, .btn-wa) y
  * las variables de tema (--ink, --amber, --paper) para calzar con la calculadora.
  * Debe renderizarse dentro del <div className="ay"> de page.js.
  */
+
+// Países disponibles (Colombia primero por defecto; resto para leads del exterior).
+const COUNTRIES = [
+  { code: 'CO', name: 'Colombia' },
+  { code: 'US', name: 'Estados Unidos' },
+  { code: 'ES', name: 'España' },
+  { code: 'MX', name: 'México' },
+  { code: 'CA', name: 'Canadá' },
+  { code: 'AR', name: 'Argentina' },
+  { code: 'CL', name: 'Chile' },
+  { code: 'PE', name: 'Perú' },
+  { code: 'EC', name: 'Ecuador' },
+  { code: 'VE', name: 'Venezuela' },
+  { code: 'PA', name: 'Panamá' },
+  { code: 'CR', name: 'Costa Rica' },
+  { code: 'GT', name: 'Guatemala' },
+  { code: 'DO', name: 'República Dominicana' },
+  { code: 'BO', name: 'Bolivia' },
+  { code: 'PY', name: 'Paraguay' },
+  { code: 'UY', name: 'Uruguay' },
+  { code: 'BR', name: 'Brasil' },
+  { code: 'GB', name: 'Reino Unido' },
+  { code: 'IT', name: 'Italia' },
+  { code: 'FR', name: 'Francia' },
+  { code: 'DE', name: 'Alemania' },
+  { code: 'PT', name: 'Portugal' },
+  { code: 'AU', name: 'Australia' },
+]
+
+// Bandera emoji a partir del código ISO de 2 letras (degrada a "CO" en Windows).
+const flag = (cc) =>
+  cc.replace(/./g, (c) => String.fromCodePoint(127397 + c.charCodeAt(0)))
+
 export default function LeadForm() {
   const [estado, setEstado] = useState('idle') // 'idle' | 'enviando' | 'ok' | 'error'
   const [errorMsg, setErrorMsg] = useState('')
+  const [country, setCountry] = useState('CO') // Colombia por defecto
+  const [numero, setNumero] = useState('')
 
   async function handleSubmit(e) {
     e.preventDefault()
     setErrorMsg('')
 
     const fd = new FormData(e.currentTarget)
+
     const consentimiento = fd.get('consentimiento') === 'on'
     if (!consentimiento) {
       setErrorMsg('Debes autorizar el tratamiento de datos para continuar.')
       return
     }
 
+    // Teléfono: se arma con el país elegido y se valida antes de enviar.
+    const parsed = parsePhoneNumberFromString(numero || '', country)
+    if (!parsed || !parsed.isValid()) {
+      setErrorMsg('Ingresa un número de teléfono válido para el país seleccionado.')
+      return
+    }
+    const telefono = parsed.number // formato E.164, ej. +573001234567
+
     const payload = {
       nombre: fd.get('nombre')?.trim(),
-      telefono: fd.get('telefono')?.trim(),
+      telefono,
       actividad: fd.get('actividad')?.trim() || null,
       ingresos: fd.get('ingresos')?.trim() || null,
       modalidad: fd.get('modalidad') || null,
@@ -71,7 +119,7 @@ export default function LeadForm() {
     color: 'rgba(245,244,239,.72)',
     margin: '18px 0 8px',
   }
-  // Opciones del desplegable: texto oscuro sobre blanco para buen contraste.
+  // Opciones de los desplegables: texto oscuro sobre blanco para buen contraste.
   const optionStyle = { color: '#0f272d', background: '#ffffff' }
 
   if (estado === 'ok') {
@@ -102,7 +150,33 @@ export default function LeadForm() {
           <input name="nombre" required className="field" placeholder="Tu nombre" />
 
           <label style={labelStyle}>Teléfono / WhatsApp *</label>
-          <input name="telefono" required inputMode="tel" className="field" placeholder="300 000 0000" />
+          <div style={{ display: 'flex', gap: 8 }}>
+            {/* Selector de código de país. Colombia (+57) por defecto. */}
+            <select
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              className="field"
+              aria-label="Código de país"
+              style={{ flex: '0 0 auto', width: 132 }}
+            >
+              {COUNTRIES.map((c) => (
+                <option key={c.code} value={c.code} title={c.name} style={optionStyle}>
+                  {flag(c.code)} +{getCountryCallingCode(c.code)}
+                </option>
+              ))}
+            </select>
+            {/* Número nacional; se combina con el país para formar el E.164. */}
+            <input
+              type="tel"
+              inputMode="tel"
+              value={numero}
+              onChange={(e) => setNumero(e.target.value)}
+              required
+              className="field"
+              style={{ flex: 1 }}
+              placeholder="300 000 0000"
+            />
+          </div>
 
           <label style={labelStyle}>¿A qué te dedicas?</label>
           <input name="actividad" className="field" placeholder="Ej: comerciante, taxista…" />
