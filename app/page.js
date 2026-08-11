@@ -20,8 +20,8 @@ const BRAND           = "¡Afiliamos Ya!";
 const SMMLV = 1750905;
 const ARL_RATES = { I: 0.00522, II: 0.01044, III: 0.02436, IV: 0.0435, V: 0.0696 };
 
-// Redondea al múltiplo de 100 más cercano (como exige la PILA)
-const r100 = (n) => Math.round((n || 0) / 100) * 100;
+// Redondea al múltiplo de 100 hacia arriba (como exige la PILA)
+const r100 = (n) => Math.ceil((n || 0) / 100) * 100;
 
 const cop = (n) =>
   new Intl.NumberFormat("es-CO", {
