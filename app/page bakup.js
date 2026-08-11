@@ -14,7 +14,7 @@ import React, { useState, useMemo } from "react";
  */
 const WHATSAPP_NUMBER = "573112826000";      // <- tu número real, formato 57 + celular
 const ADMIN_FEE_FROM  = 29900;               // <- tu cuota de administración real (placeholder)
-const BRAND           = "¡Afiliamos Ya!";
+const BRAND           = "Afiliamos Ya";
 
 // --- Parámetros legales 2026 (fuente: Siscoopweb / normativa vigente) ---
 const SMMLV = 1750905;
@@ -271,8 +271,8 @@ export default function App() {
       {/* WEDGE */}
       <div className="wedge">
         <div className="wrap">
-          <b>Sin ARL, un accidente de trabajo te deja sin nada.</b>
-          <span>Como independiente tu riesgo es real — tu protección también debe serlo.</span>
+          <b>Sin ARL, un accidente en la vía te deja sin nada.</b>
+          <span>Como conductor tu riesgo es real — tu protección también debe serlo.</span>
         </div>
       </div>
 
@@ -399,8 +399,8 @@ export default function App() {
                 <div className="amt">{cop(r.total)}</div>
               </div>
               <div className="note">
-                + gestión {BRAND} <b>para independientes</b> desde {cop(ADMIN_FEE_FROM)}/mes:
-                afiliación, planilla, soporte y ARL incluida. Valor exacto en tu cotización.
+                + gestión {BRAND} desde <b>"para independientes"</b> {cop(ADMIN_FEE_FROM)}/mes: afiliación, planilla,
+                soporte y ARL incluida. Valor exacto en tu cotización.
               </div>
               <a className="btn btn-wa" href={waLink(cotizaMsg)} target="_blank" rel="noreferrer">
                 Recibir mi cotización exacta
@@ -414,12 +414,9 @@ export default function App() {
       <section className="section" style={{ background: "var(--paper-2)" }}>
         <div className="wrap">
           <span className="eyebrow">Para quién</span>
-          <h2 style={{ marginTop: 10 }}>Hecho para cada tipo de independiente</h2>
+          <h2 style={{ marginTop: 10 }}>Hecho para los que trabajan en la vía</h2>
           <div className="cards">
             {[
-              ["📄", "Contratistas de prestación de servicios", "Con contrato de más de un mes, la ARL es obligatoria. Te dejamos al día para firmar sin líos."],
-              ["💼", "Profesionales independientes", "Consultores, salud, ingeniería, derecho. Salud, pensión y ARL en regla, sin perder tiempo."],
-              ["🏪", "Comerciantes y cuenta propia", "Trabajas por tu cuenta. Calculamos el aporte justo sobre tu IBC y lo gestionamos cada mes."],
               ["🚕", "Conductores de app y taxi", "Muchas plataformas ya te exigen estar al día. Te dejamos listo para trabajar sin trabas."],
               ["🚚", "Camioneros y transportadores", "Riesgo clase V cubierto. Protección real para las horas que pasas en carretera."],
               ["📦", "Distribuidores y repartidores", "Comercializas producto por tu cuenta. Te afiliamos como independiente, con ARL."],
@@ -444,11 +441,11 @@ export default function App() {
             <div>
               <span className="eyebrow">¿Tienes una flota?</span>
               <h2 style={{ marginTop: 10, fontSize: "clamp(1.7rem,3.5vw,2.4rem)" }}>
-                Afiliamos a todo tu equipo de independientes
+                Afiliamos a todos tus conductores y distribuidores
               </h2>
               <p className="sub">
-                Si tu empresa trabaja con contratistas, conductores, distribuidores u
-                otros independientes, los dejamos a todos protegidos con ARL — sin que
+                Si tu empresa mueve producto con conductores o distribuidores
+                independientes, los dejamos a todos protegidos con ARL — sin que
                 tú tengas que administrar nada.
               </p>
               <ul>
