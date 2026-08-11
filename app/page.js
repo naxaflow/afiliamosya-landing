@@ -31,7 +31,7 @@ const cop = (n) =>
   }).format(Math.round(n || 0));
 
 function liquidar(ingresos, o) {
-  const ibc = Math.max(ingresos * 0.4, SMMLV);
+  const ibc = Math.min(Math.max(ingresos * 0.4, SMMLV), 25 * SMMLV);
   const salud = !o.exterior && o.salud ? r100(ibc * 0.125) : 0; // exterior no aporta salud
   const pension = o.pension ? r100(ibc * 0.16) : 0;
   const arl = o.arl ? r100(ibc * ARL_RATES[o.riesgo]) : 0;
