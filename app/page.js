@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import LeadForm from "@/components/LeadForm";
 
 /**
  * AFILIAMOS YA — Landing de conversión v1
@@ -521,6 +522,9 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {/* AFILIACIÓN — formulario que guarda el lead en Supabase */}
+      <LeadForm />
 
       {/* CLOSER */}
       <section className="closer">
