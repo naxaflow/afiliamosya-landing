@@ -290,10 +290,18 @@ export default function App() {
             <div className="inputs">
               <label>Modalidad</label>
               <div className="risk" style={{ gridTemplateColumns: "1fr 1fr" }}>
-                <button type="button" className={!exterior ? "on" : ""} onClick={() => setExterior(false)}>
+                <button
+                  type="button"
+                  className={!exterior ? "on" : ""}
+                  onClick={() => { setExterior(false); setSalud(true); setPension(true); }}
+                >
                   En Colombia
                 </button>
-                <button type="button" className={exterior ? "on" : ""} onClick={() => setExterior(true)}>
+                <button
+                  type="button"
+                  className={exterior ? "on" : ""}
+                  onClick={() => { setExterior(true); setPension(true); setArl(false); setCaja(false); }}
+                >
                   Residente exterior
                 </button>
               </div>
