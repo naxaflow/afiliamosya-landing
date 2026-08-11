@@ -189,7 +189,7 @@ export default function App() {
   const [salud, setSalud] = useState(true);
   const [pension, setPension] = useState(true);
   const [arl, setArl] = useState(true);
-  const [riesgo, setRiesgo] = useState("IV");
+  const [riesgo, setRiesgo] = useState("I");
   const [caja, setCaja] = useState(false);
   const [cajaRate, setCajaRate] = useState(0.02);
 
