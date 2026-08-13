@@ -45,6 +45,9 @@ const COUNTRIES = [
   { code: 'AU', name: 'Australia' },
 ]
 
+// Salario mínimo mensual legal vigente en Colombia (COP). Actualizar cada año.
+const SMMLV = 1750905
+
 // Bandera emoji a partir del código ISO de 2 letras (degrada a "CO" en Windows).
 const flag = (cc) =>
   cc.replace(/./g, (c) => String.fromCodePoint(127397 + c.charCodeAt(0)))
@@ -312,7 +315,20 @@ export default function LeadForm() {
           <input name="actividad" className="field" placeholder="Ej: comerciante, taxista…" />
 
           <label style={labelStyle}>Ingresos mensuales aprox.</label>
-          <input name="ingresos" type="number" min="0" step="1000" className="field" placeholder="$" />
+          <input
+            name="ingresos"
+            type="number"
+            min={SMMLV}
+            step="1"
+            defaultValue={SMMLV}
+            inputMode="numeric"
+            onKeyDown={(e) => {
+              // Solo enteros exactos: bloquea decimales, notación científica y signos.
+              if (['e', 'E', '+', '-', '.', ','].includes(e.key)) e.preventDefault()
+            }}
+            className="field"
+            placeholder="$"
+          />
 
           <label style={labelStyle}>Modalidad *</label>
           <select name="modalidad" required defaultValue="" className="field">
