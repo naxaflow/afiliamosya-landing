@@ -198,6 +198,7 @@ export default function LeadForm() {
   const [errorMsg, setErrorMsg] = useState('')
   const [country, setCountry] = useState('CO') // Colombia por defecto
   const [numero, setNumero] = useState('')
+  const [ingresos, setIngresos] = useState(String(SMMLV)) // solo dígitos; por defecto el SMMLV
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -219,11 +220,17 @@ export default function LeadForm() {
     }
     const telefono = parsed.number // formato E.164, ej. +573001234567
 
+    // Ingresos: solo enteros; si se indica, no puede ser menor al salario mínimo.
+    if (ingresos && Number(ingresos) < SMMLV) {
+      setErrorMsg('Los ingresos no pueden ser menores al salario mínimo ($1.750.905).')
+      return
+    }
+
     const payload = {
       nombre: fd.get('nombre')?.trim(),
       telefono,
       actividad: fd.get('actividad')?.trim() || null,
-      ingresos: fd.get('ingresos')?.trim() || null,
+      ingresos: ingresos || null,
       modalidad: fd.get('modalidad') || null,
       mensaje: fd.get('mensaje')?.trim() || null,
       consentimiento: true,
@@ -315,20 +322,32 @@ export default function LeadForm() {
           <input name="actividad" className="field" placeholder="Ej: comerciante, taxista…" />
 
           <label style={labelStyle}>Ingresos mensuales aprox.</label>
-          <input
-            name="ingresos"
-            type="number"
-            min={SMMLV}
-            step="1"
-            defaultValue={SMMLV}
-            inputMode="numeric"
-            onKeyDown={(e) => {
-              // Solo enteros exactos: bloquea decimales, notación científica y signos.
-              if (['e', 'E', '+', '-', '.', ','].includes(e.key)) e.preventDefault()
-            }}
-            className="field"
-            placeholder="$"
-          />
+          {/* Texto formateado (miles con puntos) + prefijo $; guarda solo dígitos.
+              type=text evita las flechitas y la notación de type=number. */}
+          <div style={{ position: 'relative' }}>
+            <span
+              style={{
+                position: 'absolute',
+                left: 14,
+                top: '50%',
+                transform: 'translateY(-50%)',
+                color: 'rgba(245,244,239,.55)',
+                pointerEvents: 'none',
+              }}
+            >
+              $
+            </span>
+            <input
+              type="text"
+              inputMode="numeric"
+              aria-label="Ingresos mensuales aproximados en pesos"
+              value={ingresos ? new Intl.NumberFormat('es-CO').format(Number(ingresos)) : ''}
+              onChange={(e) => setIngresos(e.target.value.replace(/\D/g, ''))}
+              className="field"
+              style={{ paddingLeft: 28 }}
+              placeholder="1.750.905"
+            />
+          </div>
 
           <label style={labelStyle}>Modalidad *</label>
           <select name="modalidad" required defaultValue="" className="field">
