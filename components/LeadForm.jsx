@@ -123,7 +123,7 @@ function CountrySelect({ value, onChange }) {
             left: 0,
             zIndex: 50,
             width: 280,
-            background: '#12333a',
+            background: '#1a1a1a',
             border: '1px solid rgba(245,244,239,.18)',
             borderRadius: 12,
             boxShadow: '0 14px 34px rgba(0,0,0,.45)',

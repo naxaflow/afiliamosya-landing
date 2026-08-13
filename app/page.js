@@ -44,14 +44,17 @@ function liquidar(ingresos, o) {
 
 const css = `
 :root{
-  --ink:#0f272d; --ink-soft:#1b3b43; --paper:#f5f4ef; --paper-2:#ecebe3;
-  --amber:#f2a71b; --amber-deep:#c9830a; --teal:#2c7d76; --teal-2:#e3efec;
-  --line:rgba(15,39,45,.12); --muted:#5b6d70;
+  /* Paleta de marca ¡Afiliamos Ya!  (--ink=negro, --paper=blanco, --amber=naranja) */
+  --ink:#000000; --ink-soft:#1a1a1a; --paper:#ffffff; --paper-2:#f4f4f4;
+  --amber:#ff7700; --amber-deep:#cc5f00; --teal:#ff7700; --teal-2:#f4f4f4;
+  --line:#d9d9d9; --muted:#898989;
+  --font-body:'Montserrat',system-ui,-apple-system,sans-serif;
+  --font-display:'Archivo','Montserrat',sans-serif;
 }
 *{box-sizing:border-box}
-.ay{font-family:"Public Sans",system-ui,sans-serif;color:var(--ink);
+.ay{font-family:var(--font-body),system-ui,sans-serif;color:var(--ink);
   background:var(--paper);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-.ay h1,.ay h2,.ay h3,.ay .display{font-family:"Bricolage Grotesque","Public Sans",sans-serif;
+.ay h1,.ay h2,.ay h3,.ay .display{font-family:var(--font-display),var(--font-body),sans-serif;
   line-height:1.02;letter-spacing:-.02em;font-weight:800;margin:0}
 .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
 .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}
@@ -59,7 +62,7 @@ const css = `
   font-family:inherit;font-weight:700;font-size:1rem;border-radius:999px;padding:.9rem 1.4rem;
   text-decoration:none;transition:transform .12s ease,box-shadow .12s ease}
 .btn:hover{transform:translateY(-2px)}
-.btn-wa{background:var(--amber);color:#231402;box-shadow:0 8px 22px rgba(242,167,27,.35)}
+.btn-wa{background:var(--amber);color:#fff;box-shadow:0 8px 22px rgba(255,119,0,.35)}
 .btn-ghost{background:transparent;color:var(--paper);border:1.5px solid rgba(245,244,239,.5)}
 .btn-teal{background:var(--ink);color:var(--paper)}
 
@@ -68,10 +71,10 @@ const css = `
   padding:38px 0 64px}
 .hero:before{content:"";position:absolute;inset:0;pointer-events:none;
   background:
-   radial-gradient(680px 380px at 88% -8%, rgba(242,167,27,.16), transparent 60%),
+   radial-gradient(680px 380px at 88% -8%, rgba(255,119,0,.18), transparent 60%),
    repeating-linear-gradient(115deg, transparent 0 46px, rgba(245,244,239,.03) 46px 48px)}
 .nav{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2}
-.brand{display:flex;align-items:center;gap:.55rem;font-family:"Bricolage Grotesque",sans-serif;
+.brand{display:flex;align-items:center;gap:.55rem;font-family:var(--font-display),sans-serif;
   font-weight:800;font-size:1.25rem;letter-spacing:-.02em}
 .brand .dot{width:26px;height:26px;border-radius:8px;background:var(--amber);
   display:grid;place-items:center;color:#231402;font-size:.9rem}
@@ -85,20 +88,20 @@ const css = `
 .trust-row{display:flex;gap:18px;flex-wrap:wrap;margin-top:30px;
   font-size:.82rem;color:rgba(245,244,239,.72)}
 .trust-row b{color:var(--paper)}
-.seal{background:linear-gradient(160deg,#12333a,#0c1f24);border:1px solid rgba(242,167,27,.28);
+.seal{background:linear-gradient(160deg,#1a1a1a,#000);border:1px solid rgba(255,119,0,.3);
   border-radius:20px;padding:26px;position:relative}
-.seal .badge{display:inline-flex;align-items:center;gap:.45rem;background:rgba(242,167,27,.14);
+.seal .badge{display:inline-flex;align-items:center;gap:.45rem;background:rgba(255,119,0,.16);
   color:var(--amber);font-weight:700;font-size:.78rem;padding:.4rem .7rem;border-radius:999px}
 .seal h3{color:var(--paper);font-size:1.35rem;margin:16px 0 8px}
 .seal p{color:rgba(245,244,239,.75);font-size:.95rem;margin:0}
-.seal .big{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;color:var(--amber);
+.seal .big{font-family:var(--font-display),sans-serif;font-weight:800;color:var(--amber);
   font-size:2.6rem;line-height:1;margin-top:18px}
 
 /* WEDGE strip */
-.wedge{background:var(--amber);color:#231402}
+.wedge{background:var(--amber);color:#fff}
 .wedge .wrap{display:flex;align-items:center;gap:16px;padding:16px 22px;flex-wrap:wrap;
   font-weight:600}
-.wedge b{font-family:"Bricolage Grotesque",sans-serif}
+.wedge b{font-family:var(--font-display),sans-serif}
 
 /* SECTION scaffolding */
 .section{padding:64px 0}
@@ -109,7 +112,7 @@ const css = `
 .calc{background:var(--ink);color:var(--paper);border-radius:26px;overflow:hidden;
   display:grid;grid-template-columns:1fr 1fr}
 .calc .inputs{padding:32px}
-.calc .out{padding:32px;background:linear-gradient(180deg,#12333a,#0d2429)}
+.calc .out{padding:32px;background:linear-gradient(180deg,#1a1a1a,#000)}
 .calc label{display:block;font-size:.82rem;font-weight:700;letter-spacing:.02em;
   color:rgba(245,244,239,.72);margin:18px 0 8px}
 .calc label:first-child{margin-top:0}
@@ -120,28 +123,28 @@ const css = `
 .risk button{background:rgba(245,244,239,.06);border:1px solid rgba(245,244,239,.16);
   color:rgba(245,244,239,.8);border-radius:10px;padding:.6rem 0;font-weight:700;cursor:pointer;
   font-family:inherit;font-size:.95rem}
-.risk button.on{background:var(--amber);color:#231402;border-color:var(--amber)}
+.risk button.on{background:var(--amber);color:#111;border-color:var(--amber)}
 .chk{display:flex;align-items:center;gap:.6rem;margin-top:18px;font-size:.9rem;
   color:rgba(245,244,239,.85);cursor:pointer}
 .chk input{width:18px;height:18px;accent-color:var(--amber)}
-.infobox{margin-top:10px;background:rgba(44,125,118,.14);border:1px solid rgba(44,125,118,.4);
+.infobox{margin-top:10px;background:rgba(255,119,0,.12);border:1px solid rgba(255,119,0,.35);
   border-radius:12px;padding:12px 14px;font-size:.86rem;color:rgba(245,244,239,.9);line-height:1.45}
 .infobox b{color:var(--amber)}
 .row{display:flex;justify-content:space-between;align-items:baseline;padding:.55rem 0;
   border-bottom:1px dashed rgba(245,244,239,.14);font-size:.98rem}
 .row span:first-child{color:rgba(245,244,239,.72)}
 .row b{font-variant-numeric:tabular-nums}
-.total{margin-top:16px;background:rgba(242,167,27,.12);border:1px solid rgba(242,167,27,.35);
+.total{margin-top:16px;background:rgba(255,119,0,.12);border:1px solid rgba(255,119,0,.35);
   border-radius:14px;padding:16px 18px}
 .total .lab{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--amber)}
-.total .amt{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:2.3rem;
-  line-height:1;margin-top:4px}
+.total .amt{font-family:var(--font-display),sans-serif;font-weight:800;font-size:2.3rem;
+  line-height:1;margin-top:4px;color:var(--amber)}
 .note{font-size:.82rem;color:rgba(245,244,239,.62);margin-top:14px}
 .calc .btn-wa{width:100%;justify-content:center;margin-top:16px}
 
 /* SEGMENTS */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
-.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px}
+.card{background:#fff;border:1px solid var(--line);border-top:3px solid var(--amber);border-radius:18px;padding:22px}
 .card .ic{font-size:1.6rem}
 .card h3{font-size:1.15rem;margin:12px 0 6px}
 .card p{color:var(--muted);font-size:.92rem;margin:0}
@@ -149,7 +152,7 @@ const css = `
 /* ANCLA (B2B) */
 .ancla{background:var(--teal-2)}
 .ancla-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.ancla .num{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;color:var(--teal);
+.ancla .num{font-family:var(--font-display),sans-serif;font-weight:800;color:var(--teal);
   font-size:clamp(3.4rem,8vw,5.5rem);line-height:.9}
 .ancla ul{list-style:none;padding:0;margin:18px 0 0}
 .ancla li{display:flex;gap:.6rem;padding:.4rem 0;font-size:1rem}
@@ -158,7 +161,7 @@ const css = `
 /* STEPS */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px;counter-reset:s}
 .step{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;position:relative}
-.step:before{counter-increment:s;content:"0" counter(s);font-family:"Bricolage Grotesque",sans-serif;
+.step:before{counter-increment:s;content:"0" counter(s);font-family:var(--font-display),sans-serif;
   font-weight:800;font-size:1.1rem;color:var(--amber-deep)}
 .step h3{font-size:1.1rem;margin:8px 0 6px}
 .step p{color:var(--muted);font-size:.92rem;margin:0}
@@ -166,7 +169,7 @@ const css = `
 /* FAQ */
 .faq{max-width:760px;margin:36px auto 0}
 .qa{border-top:1px solid var(--line);padding:20px 0}
-.qa summary{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1.1rem;
+.qa summary{font-family:var(--font-display),sans-serif;font-weight:700;font-size:1.1rem;
   cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1rem}
 .qa summary::-webkit-details-marker{display:none}
 .qa summary:after{content:"+";color:var(--amber-deep);font-size:1.4rem;line-height:1}
@@ -177,7 +180,7 @@ const css = `
 .closer{background:var(--ink);color:var(--paper);text-align:center;padding:72px 0}
 .closer h2{font-size:clamp(2rem,5vw,3.2rem);max-width:100%;margin:0 auto}
 .closer p{color:rgba(245,244,239,.78);max-width:46ch;margin:18px auto 0}
-.foot{background:#0a1c21;color:rgba(245,244,239,.6);font-size:.85rem;padding:28px 0}
+.foot{background:#000;color:rgba(255,255,255,.6);font-size:.85rem;padding:28px 0}
 .foot .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 @media(max-width:860px){
@@ -217,8 +220,9 @@ export default function App() {
     <div className="ay">
       <style dangerouslySetInnerHTML={{ __html: css }} />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link
-        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Public+Sans:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Montserrat:wght@400;500;600;700&display=swap"
         rel="stylesheet"
       />
 
@@ -546,6 +550,7 @@ export default function App() {
 
       <footer className="foot">
         <div className="wrap">
+          <img src="/logo-white.png" alt="¡Afiliamos Ya!" style={{ height: 36, width: "auto" }} />
           <span>{BRAND} · Operamos a través de una agremiación autorizada por el Ministerio de Salud</span>
           <span>
             Al escribirnos autorizas el tratamiento de tus datos conforme a la Ley 1581 de 2012.
