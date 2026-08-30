@@ -1,0 +1,49 @@
+.wrap {
+  max-width: 760px;
+}
+
+.updated {
+  color: var(--color-gray);
+  font-size: 0.86rem;
+  margin-top: 8px;
+  font-family: var(--font-body);
+}
+
+.body {
+  margin-top: 32px;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  line-height: 1.7;
+}
+
+.body h2 {
+  font-size: 1.2rem;
+  margin: 32px 0 10px;
+}
+
+.body h2:first-child {
+  margin-top: 0;
+}
+
+.body p {
+  margin: 0 0 14px;
+  color: var(--color-ink);
+}
+
+.body ul {
+  margin: 0 0 14px;
+  padding-left: 20px;
+}
+
+.body li {
+  margin-bottom: 6px;
+}
+
+.body a {
+  color: var(--color-primary-deep);
+  font-weight: 600;
+}
+
+.body strong {
+  color: var(--color-ink);
+}

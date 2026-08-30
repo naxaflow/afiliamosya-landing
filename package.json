@@ -1,5 +1,5 @@
 {
-  "name": "afiliamosya-landing",
+  "name": "afiliamos-ya-website",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.5",
     "@supabase/supabase-js": "^2.112.3",
     "libphonenumber-js": "^1.13.10",
     "next": "16.3.0",

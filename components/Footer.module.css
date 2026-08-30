@@ -1,0 +1,83 @@
+.footer {
+  background: var(--color-ink);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 26px 28px;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.top,
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.top {
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.brandName {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.tagline {
+  font-family: var(--font-body);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.82rem;
+  padding-left: 8px;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.legal {
+  display: flex;
+  gap: 16px;
+}
+
+.legal a:hover {
+  color: var(--color-primary);
+}
+
+.contactos {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-weight: 600;
+}
+
+.contactos a {
+  color: #fff;
+}
+
+.contactos a:hover {
+  color: var(--color-primary);
+}
+
+.waContact {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.waContact svg {
+  color: #25d366;
+  flex: 0 0 auto;
+}
+
+.handle {
+  font-size: 0.78rem;
+}

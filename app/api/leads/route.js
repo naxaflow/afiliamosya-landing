@@ -1,17 +1,10 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { esOrigenValido } from '@/lib/origenes'
+import { upsertLeadConDedup } from '@/lib/leads'
 
 // Este handler corre SOLO en el servidor (Node), nunca en el navegador.
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
-
-// service_role: solo servidor. Las vars NO llevan prefijo NEXT_PUBLIC_,
-// así que jamás se incrustan en el bundle del cliente.
-const admin = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY,
-  { auth: { persistSession: false, autoRefreshToken: false } }
-)
 
 const MODALIDADES = new Set(['colombia', 'exterior'])
 
@@ -21,6 +14,17 @@ export async function POST(req) {
     body = await req.json()
   } catch {
     return NextResponse.json({ error: 'Solicitud inválida.' }, { status: 400 })
+  }
+
+  // --- Anti-spam: honeypot + trampa de tiempo ---
+  // Si el honeypot llegó lleno, o el envío fue casi instantáneo (< 1.5s desde
+  // que se pintó el formulario), es casi con certeza un bot. Se responde éxito
+  // igualmente para no delatar la detección, sin insertar nada.
+  const honeypot = String(body?.sitio_web ?? '')
+  const montadoEn = Number(body?.montado_en)
+  const envioMuyRapido = Number.isFinite(montadoEn) && Date.now() - montadoEn < 1500
+  if (honeypot || envioMuyRapido) {
+    return NextResponse.json({ ok: true }, { status: 201 })
   }
 
   // --- Validaciones mínimas ---
@@ -53,20 +57,23 @@ export async function POST(req) {
     ingresos = Number.isFinite(n) && n >= 0 ? n : null
   }
 
-  // --- Inserción (service_role ignora RLS por diseño) ---
-  const { error } = await admin.from('leads').insert({
-    nombre,
-    telefono,
-    actividad: String(body?.actividad ?? '').trim() || null,
-    ingresos,
-    modalidad: modalidad || null,
-    mensaje: String(body?.mensaje ?? '').trim() || null,
-    consentimiento: true,
-    consentimiento_fecha: new Date().toISOString(), // fecha del envío
-    // origen y estado usan sus DEFAULT ('landing' / 'nuevo')
-  })
+  // origen: qué página del sitio envió el lead. Si no llega o no está en el
+  // allow-list, se omite y la columna usa su DEFAULT ('landing').
+  const origenCandidato = String(body?.origen ?? '').trim()
+  const origen = esOrigenValido(origenCandidato) ? origenCandidato : ''
 
-  if (error) {
+  try {
+    await upsertLeadConDedup({
+      nombre,
+      telefono,
+      correo: String(body?.correo ?? '').trim() || null,
+      actividad: String(body?.actividad ?? '').trim() || null,
+      ingresos,
+      modalidad: modalidad || null,
+      mensaje: String(body?.mensaje ?? '').trim() || null,
+      origen: origen || null,
+    })
+  } catch (error) {
     console.error('Error guardando lead:', error.message) // no exponemos detalle al cliente
     return NextResponse.json({ error: 'No pudimos registrar tus datos.' }, { status: 500 })
   }

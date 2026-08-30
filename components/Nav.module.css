@@ -1,0 +1,168 @@
+.nav {
+  background: var(--color-primary);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+}
+
+.bar {
+  padding: 32px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #fff;
+  flex: 0 0 auto;
+  margin-left: 24px;
+}
+
+.tabs {
+  display: flex;
+  gap: 34px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  overflow-x: auto;
+  flex: 1;
+  justify-content: center;
+}
+
+.tab,
+.tabOn {
+  color: rgba(255, 255, 255, 0.72);
+  white-space: nowrap;
+}
+
+.tabOn {
+  color: #fff;
+}
+
+.cta {
+  flex: 0 0 auto;
+  font-size: 0.82rem;
+}
+
+.toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  flex: 0 0 auto;
+}
+
+.toggle span {
+  width: 20px;
+  height: 2px;
+  background: #fff;
+  display: block;
+}
+
+@keyframes navFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.brand,
+.tabs > a,
+.cta,
+.toggle {
+  animation: navFadeIn 0.6s ease-out both;
+}
+
+.tabs > a:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.tabs > a:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.tabs > a:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.tabs > a:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.tabs > a:nth-child(5) {
+  animation-delay: 0.25s;
+}
+.tabs > a:nth-child(6) {
+  animation-delay: 0.3s;
+}
+.tabs > a:nth-child(7) {
+  animation-delay: 0.35s;
+}
+.tabs > a:nth-child(8) {
+  animation-delay: 0.4s;
+}
+
+.cta,
+.toggle {
+  animation-delay: 0.45s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand,
+  .tabs > a,
+  .cta,
+  .toggle {
+    animation: none;
+  }
+}
+
+.mobileMenu {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .tabs,
+  .cta {
+    display: none;
+  }
+
+  .toggle {
+    display: flex;
+  }
+
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 20px 18px;
+    background: #fff;
+    gap: 2px;
+  }
+
+  .mobileTab,
+  .mobileTabOn {
+    padding: 12px 4px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--color-gray);
+    border-bottom: 1px solid var(--color-gray-light);
+  }
+
+  .mobileTabOn {
+    color: var(--color-primary);
+  }
+
+  .mobileCta {
+    margin-top: 14px;
+    justify-content: center;
+  }
+}
