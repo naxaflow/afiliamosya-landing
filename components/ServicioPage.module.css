@@ -1,0 +1,371 @@
+.banner {
+  position: relative;
+  overflow: hidden;
+  height: calc(100vh - 136px);
+  height: calc(100svh - 136px);
+  min-height: 460px;
+  display: flex;
+  align-items: flex-end;
+  padding: 32px 28px;
+}
+
+.bannerPhoto {
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+.bannerScrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.5) 55%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+}
+
+.bannerContent {
+  position: relative;
+  z-index: 2;
+  max-width: 1080px;
+  margin: 0 auto;
+  margin-bottom: 48px;
+  width: 100%;
+}
+
+.bannerEyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #ff9433;
+}
+
+.bannerTitle {
+  color: #ff9433;
+  font-weight: 700;
+  margin-top: 8px;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  max-width: 26ch;
+}
+
+.header {
+  max-width: 66ch;
+}
+
+.lista {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--color-ink);
+}
+
+.lista li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 2px;
+  border-bottom: 1px solid var(--color-gray-light);
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.lista li svg {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+}
+
+.listaIcon {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-primary);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closing {
+  margin-top: 24px;
+  color: var(--color-gray);
+  max-width: 60ch;
+  font-family: var(--font-body);
+}
+
+.ctaBox {
+  margin-top: 32px;
+  border: 1px solid var(--color-gray-light);
+  border-radius: 14px;
+  padding: 22px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: #fff;
+}
+
+.ctaBox p {
+  margin: 0;
+  font-weight: 600;
+  max-width: 44ch;
+  font-family: var(--font-body);
+}
+
+.ctaBtn {
+  flex: 0 0 auto;
+  font-size: 0.94rem;
+}
+
+/* callout oscuro — para el diferenciador de ARL (único bloque negro en las
+   páginas de servicio, reservado a este mensaje recurrente) */
+.calloutDark {
+  margin-top: 28px;
+  background: var(--color-ink);
+  color: #fff;
+  border-radius: 14px;
+  padding: 24px 26px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.calloutDark .icon {
+  color: var(--color-primary);
+  font-size: 1.3rem;
+  flex: 0 0 auto;
+}
+
+.calloutDark h3 {
+  color: #fff;
+  font-size: 1.08rem;
+  margin: 0 0 8px;
+}
+
+.calloutDark p {
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.92rem;
+  margin: 0;
+  font-family: var(--font-body);
+}
+
+/* callout claro — para ofertas destacadas (Premium, flota, exterior) */
+.calloutLight {
+  margin-top: 28px;
+  background: rgba(255, 119, 0, 0.07);
+  border: 1px solid rgba(255, 119, 0, 0.3);
+  border-radius: 14px;
+  padding: 24px 26px;
+}
+
+.calloutLight .badge {
+  display: inline-flex;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary-deep);
+}
+
+.calloutLight h3 {
+  font-size: 1.15rem;
+  margin: 10px 0 8px;
+}
+
+.calloutLight p {
+  color: var(--color-ink);
+  font-size: 0.94rem;
+  margin: 0 0 6px;
+  font-family: var(--font-body);
+}
+
+.calloutLight ul {
+  margin: 12px 0 0;
+  padding-left: 18px;
+  font-size: 0.9rem;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+.calloutLight li {
+  margin-bottom: 4px;
+}
+
+/* Secciones de servicio a pantalla completa — cada servicio (ej. Salud
+   familiar, Plan Pensional en Colombianos en el Exterior) con su propia
+   foto de fondo, para que se identifiquen como ofertas separadas en vez
+   de tarjetas genéricas una junto a la otra. */
+.serviceSection {
+  position: relative;
+  overflow: hidden;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+}
+
+.serviceBg {
+  object-fit: cover;
+}
+
+.serviceScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.6) 45%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
+}
+
+.serviceContent {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 64px 28px;
+  width: 100%;
+}
+
+/* Variante para alinear el bloque de texto al lado derecho de la sección
+   (ej. Servicio 2 en Colombianos en el Exterior), con el scrim invertido
+   para que siga oscuro detrás del texto. */
+.serviceScrimRight {
+  background: linear-gradient(
+    270deg,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.6) 45%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
+}
+
+/* Envuelve el texto DENTRO del mismo carril centrado de 1080px que usa
+   el Servicio 1 (no del borde real de la sección), solo que ancla el
+   bloque al lado derecho de ese carril. */
+.serviceInnerRight {
+  margin-left: auto;
+  margin-right: 0;
+  max-width: 560px;
+  text-align: right;
+}
+
+/* Sin esto, el max-width en ch de .serviceTitle/.serviceDesc (pensado para
+   controlar el largo de línea cuando el texto está a la izquierda) deja
+   sus cajas más angostas que el contenedor y ancladas a la izquierda,
+   rompiendo el alineado a la derecha. */
+.serviceInnerRight .serviceTitle,
+.serviceInnerRight .serviceDesc {
+  max-width: none;
+}
+
+.serviceInnerRight .serviceList {
+  margin-left: auto;
+  text-align: left;
+}
+
+@media (max-width: 700px) {
+  .serviceInnerRight {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .serviceScrimRight {
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.88) 0%,
+      rgba(0, 0, 0, 0.55) 55%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
+  }
+}
+
+.serviceEyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.serviceTitle {
+  color: #fff;
+  margin-top: 10px;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  max-width: 20ch;
+}
+
+.serviceDesc {
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 16px;
+  max-width: 52ch;
+  font-size: 1rem;
+  font-family: var(--font-body);
+}
+
+.serviceList {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  max-width: 44ch;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.serviceList li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.serviceList svg {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  color: var(--color-primary);
+}
+
+.serviceCta {
+  margin-top: 28px;
+}
+
+@media (max-width: 700px) {
+  .serviceSection {
+    min-height: 480px;
+  }
+
+  .serviceScrim {
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.88) 0%,
+      rgba(0, 0, 0, 0.55) 55%,
+      rgba(0, 0, 0, 0.2) 100%
+    );
+  }
+}
+
+@media (max-width: 700px) {
+  .banner {
+    height: calc(100vh - 116px);
+    height: calc(100svh - 116px);
+    min-height: 420px;
+  }
+
+  .lista {
+    grid-template-columns: 1fr;
+  }
+
+  .ctaBox {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

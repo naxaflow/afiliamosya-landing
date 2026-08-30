@@ -1,0 +1,134 @@
+.bienvenida {
+  position: relative;
+  margin-top: -2px;
+  height: calc(100vh - 136px);
+  height: calc(100svh - 136px);
+  min-height: 460px;
+  overflow: hidden;
+  background: var(--color-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photoWrap {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+/* La foto va escalada de más (1.18x) para que sobre margen: el parallax en
+   JS traslada este wrapper hasta 80px sin dejar bordes vacíos. */
+.photo {
+  object-fit: cover;
+  object-position: center 0%;
+  opacity: 0.25;
+  transform: scale(1.18);
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.32) 0%,
+    rgba(0, 0, 0, 0.18) 45%,
+    rgba(0, 0, 0, 0.38) 100%
+  );
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+  padding: 0 24px;
+}
+
+.logo {
+  margin: 0 auto 18px;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.5));
+}
+
+.titulo {
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  color: #fff;
+  text-wrap: balance;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+}
+
+.hl {
+  color: var(--color-primary);
+}
+
+.sub {
+  margin-top: 14px;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-body);
+}
+
+.scrollHint {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.85);
+  animation: bounce 1.8s ease-in-out infinite;
+}
+
+.scrollHint svg {
+  width: 26px;
+  height: 26px;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(8px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeIn1 {
+  animation: fadeInUp 0.9s ease-out both;
+}
+
+.fadeIn2 {
+  animation: fadeInUp 0.9s ease-out 0.15s both;
+}
+
+.fadeIn3 {
+  animation: fadeInUp 0.9s ease-out 0.3s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrollHint,
+  .fadeIn1,
+  .fadeIn2,
+  .fadeIn3 {
+    animation: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .bienvenida {
+    height: calc(100vh - 116px);
+    height: calc(100svh - 116px);
+    min-height: 420px;
+  }
+}

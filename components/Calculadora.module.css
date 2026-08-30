@@ -1,0 +1,402 @@
+.calc {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.inputs {
+  padding: 36px;
+}
+
+.out {
+  padding: 36px;
+  background: var(--color-surface);
+  border-left: 1px solid var(--color-gray-light);
+}
+
+.label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-gray);
+  margin: 18px 0 8px;
+}
+
+.label:first-child {
+  margin-top: 0;
+}
+
+.field {
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--color-gray-light);
+  color: var(--color-ink);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  font-size: 1.02rem;
+  font-family: inherit;
+}
+
+.field:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+.toggle2,
+.risk {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.risk {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.toggle2 button,
+.risk button {
+  background: #fff;
+  border: 1px solid var(--color-gray-light);
+  color: var(--color-gray);
+  border-radius: 8px;
+  padding: 0.6rem 0;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.92rem;
+}
+
+.on {
+  background: var(--color-primary) !important;
+  color: #fff !important;
+  border-color: var(--color-primary) !important;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 14px;
+  font-size: 0.88rem;
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary);
+}
+
+.infobox {
+  margin-top: 10px;
+  background: rgba(255, 119, 0, 0.08);
+  border: 1px solid rgba(255, 119, 0, 0.3);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.84rem;
+  color: var(--color-ink);
+  line-height: 1.45;
+}
+
+.infobox b {
+  color: var(--color-primary-deep);
+}
+
+.outLabel {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-gray);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.outLabel::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 5px solid var(--color-primary);
+  flex: 0 0 auto;
+}
+
+.offerCard {
+  background: #fff;
+  border: 2px solid var(--color-primary);
+  border-radius: 14px;
+  padding: 18px 20px 20px;
+  box-shadow: 0 8px 20px rgba(255, 119, 0, 0.12);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.55rem 0;
+  border-bottom: 1px dashed var(--color-gray-light);
+  font-size: 0.96rem;
+}
+
+.row span {
+  color: var(--color-gray);
+}
+
+.row b {
+  font-variant-numeric: tabular-nums;
+}
+
+.total {
+  margin-top: 14px;
+  background: rgba(255, 119, 0, 0.08);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.totalLab {
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-primary-deep);
+}
+
+.totalAmt {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 2.2rem;
+  line-height: 1;
+  color: var(--color-primary-deep);
+  font-variant-numeric: tabular-nums;
+}
+
+.totalRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.usdBtn {
+  flex: 0 0 auto;
+  background: #fff;
+  border: 1.5px solid var(--color-primary);
+  color: var(--color-primary-deep);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.usdBtn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.usdAmt {
+  margin-top: 8px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.usdNote {
+  font-weight: 500;
+  color: var(--color-gray);
+  font-size: 0.82rem;
+}
+
+.usdErrorMsg {
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: #c0392b;
+}
+
+.note {
+  font-size: 0.82rem;
+  color: var(--color-gray);
+  margin-top: 12px;
+}
+
+.btnWa {
+  justify-content: center;
+  width: 100%;
+  margin-top: 16px;
+}
+
+.avoidFeeBox {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.avoidFeeBox p {
+  font-size: 0.86rem;
+  color: var(--color-gray);
+  font-family: var(--font-body);
+  margin: 0 0 8px;
+}
+
+.avoidFeeLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-weight: 700;
+  font-size: 0.94rem;
+  border-radius: 999px;
+  padding: 0.85rem 1.5rem;
+  color: var(--color-ink);
+  border: 1.5px solid var(--color-gray-light);
+}
+
+.avoidFeeLink:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary-deep);
+}
+
+.btnCalcular {
+  width: 100%;
+  margin-top: 24px;
+  background: var(--color-ink);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.98rem;
+  border: none;
+  border-radius: 999px;
+  padding: 0.9rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.offerCardResaltada {
+  animation: pulse 0.9s ease-out;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 119, 0, 0.45);
+  }
+  100% {
+    box-shadow: 0 0 0 14px rgba(255, 119, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offerCardResaltada {
+    animation: none;
+  }
+}
+
+.pensionWrap {
+  border-top: 1px solid var(--color-gray-light);
+  padding: 36px;
+}
+
+.pensionHead {
+  max-width: 62ch;
+}
+
+.pensionTitle {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--color-ink);
+}
+
+.pensionInputs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.pensionSummary {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  font-size: 0.9rem;
+  color: var(--color-gray);
+}
+
+.pensionSummary b {
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.warnBox {
+  margin-top: 16px;
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.86rem;
+  color: #991b1b;
+  line-height: 1.45;
+}
+
+.pensionScenarios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.scenarioCard {
+  background: #fff;
+  border: 1.5px solid var(--color-gray-light);
+  border-radius: 14px;
+  padding: 18px 20px;
+}
+
+.scenarioCard.scenarioOn {
+  border-color: var(--color-primary);
+  box-shadow: 0 8px 20px rgba(255, 119, 0, 0.12);
+}
+
+.scenarioLabel {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-gray);
+}
+
+.scenarioAmt {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 1.2;
+  margin-top: 6px;
+  color: var(--color-primary-deep);
+  font-variant-numeric: tabular-nums;
+}
+
+.scenarioTasa {
+  font-size: 0.84rem;
+  color: var(--color-gray);
+  margin-top: 4px;
+}
+
+@media (max-width: 860px) {
+  .calc {
+    grid-template-columns: 1fr;
+  }
+
+  .out {
+    border-left: none;
+    border-top: 1px solid var(--color-gray-light);
+  }
+
+  .pensionInputs,
+  .pensionScenarios {
+    grid-template-columns: 1fr;
+  }
+}

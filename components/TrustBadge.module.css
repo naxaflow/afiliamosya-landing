@@ -1,0 +1,14 @@
+.franja {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-gray-light);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--color-gray);
+  text-align: center;
+  padding: 8px 20px;
+}
+
+.sep {
+  opacity: 0.5;
+  margin: 0 2px;
+}

@@ -1,0 +1,94 @@
+.banner {
+  background: var(--color-primary);
+  padding: 64px 28px 96px;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
+  position: relative;
+  z-index: 1;
+}
+
+.bannerInner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.title {
+  color: #fff;
+  margin-top: 10px;
+  font-size: clamp(2rem, 4.2vw, 3rem);
+  max-width: 20ch;
+}
+
+.sub {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.02rem;
+  margin-top: 14px;
+  max-width: 48ch;
+  font-family: var(--font-body);
+}
+
+.badge {
+  flex: 0 0 auto;
+  background: rgba(0, 0, 0, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 14px;
+  padding: 14px 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.badgeNum {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.badgeLabel {
+  font-size: 0.72rem;
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 16ch;
+}
+
+.wrap {
+  max-width: 1080px;
+  margin: -64px auto 0;
+  padding: 0 28px 64px;
+  position: relative;
+  z-index: 2;
+}
+
+.card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.14);
+  overflow: hidden;
+}
+
+@media (max-width: 700px) {
+  .banner {
+    padding: 44px 20px 80px;
+  }
+
+  .wrap {
+    margin-top: -52px;
+    padding: 0 16px 48px;
+  }
+
+  .badge {
+    padding: 10px 16px;
+  }
+}
