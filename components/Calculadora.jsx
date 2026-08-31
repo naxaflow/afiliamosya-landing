@@ -10,7 +10,7 @@ export default function Calculadora({ defaultExterior = false }) {
   const resultRef = useRef(null);
   const [resaltar, setResaltar] = useState(false);
   const [ingresos, setIngresos] = useState(SMMLV);
-  const [exterior, setExterior] = useState(defaultExterior);
+  const exterior = defaultExterior;
   const [salud, setSalud] = useState(true);
   const [pension, setPension] = useState(true);
   const [arl, setArl] = useState(!defaultExterior);
@@ -98,30 +98,8 @@ export default function Calculadora({ defaultExterior = false }) {
     <div className={styles.calc}>
       <div className={styles.inputs}>
         <label className={styles.label}>Modalidad</label>
-        <div className={styles.toggle2}>
-          <button
-            type="button"
-            className={!exterior ? styles.on : ""}
-            onClick={() => {
-              setExterior(false);
-              setSalud(true);
-              setPension(true);
-            }}
-          >
-            En Colombia
-          </button>
-          <button
-            type="button"
-            className={exterior ? styles.on : ""}
-            onClick={() => {
-              setExterior(true);
-              setPension(true);
-              setArl(false);
-              setCaja(false);
-            }}
-          >
-            Residente exterior
-          </button>
+        <div className={styles.modeBadge}>
+          {exterior ? "Residente exterior" : "En Colombia"}
         </div>
         <div className={styles.note}>
           {exterior

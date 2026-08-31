@@ -178,6 +178,28 @@
   margin: 10px 0 8px;
 }
 
+.calloutLight .premiumPrecio {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--color-primary-deep);
+  margin: 4px 0 12px;
+}
+
+.calloutLight .premiumPrecio span {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--color-gray);
+  margin-left: 4px;
+}
+
+.calloutLight .premiumSubtitulo {
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-top: 14px;
+}
+
 .calloutLight p {
   color: var(--color-ink);
   font-size: 0.94rem;

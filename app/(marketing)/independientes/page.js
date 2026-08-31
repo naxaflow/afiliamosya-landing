@@ -34,15 +34,24 @@ export default function Page() {
       extra={
         <div className={styles.calloutLight}>
           <span className={styles.badge}>¡Afiliamos Ya! Premium</span>
-          <h3>Acompañamiento mensual, aunque aún no estés afiliado</h3>
-          <p>
-            Una cuota mensual de gestión — cálculo de tu IBC, liquidación de tu
-            PILA, recordatorios de pago y soporte por WhatsApp — con tu aporte
-            real pagado aparte.
+          <h3>Un asesor gestiona tu Seguridad Social — tú solo te dedicas a trabajar</h3>
+          <p className={styles.premiumPrecio}>
+            $29.900 COP<span>/mes · sin permanencia</span>
           </p>
+          <p>
+            Tu aporte de ley se paga aparte, al valor exacto que te corresponde.
+            Con Premium, un asesor asignado se encarga de que nunca te falte un
+            pago ni te llegue un requerimiento por un cálculo mal hecho.
+          </p>
+          <p className={styles.premiumSubtitulo}>¿Qué incluye tu suscripción?</p>
           <ul>
-            <li>Incluye ARL colectiva real, algo que otros planes de acompañamiento no ofrecen</li>
-            <li>Ideal si ya cotizas por tu cuenta pero quieres dejar de estar pendiente</li>
+            <li>Asesor asignado para tu afiliación a EPS, ARL y Pensión</li>
+            <li>Cálculo correcto de tu IBC cada mes</li>
+            <li>Liquidación y generación de tu planilla</li>
+            <li>Recordatorios de pago, para que nunca se te pase una fecha</li>
+            <li>Gestión de novedades y ajustes cuando los necesites</li>
+            <li>Soporte directo por WhatsApp</li>
+            <li>Incluye ARL colectiva real — algo que otros planes de acompañamiento no ofrecen</li>
           </ul>
         </div>
       }
