@@ -51,6 +51,7 @@ export default function Page() {
         image="/images/exterior-hero.jpg"
         imagePosition="center 42%"
         titleColor="#fff"
+        eyebrowColor="#FF7700"
         sectionMinHeight="760px"
         lede="Si resides en el exterior, puedes cubrir a tu familia en Colombia y seguir aportando a tu pensión, sin necesidad de estar trabajando en el país."
         servicios={SERVICIOS}
@@ -138,23 +139,37 @@ export default function Page() {
         </Reveal>
       </section>
 
-      <div className={homeStyles.sectionAlt}>
-        <section className={homeStyles.section}>
+      <TrustBar message={<>Tu futuro no tiene fronteras: sigue construyendo tu <em>pensión</em>, estés donde estés.</>} />
+
+      <section className={styles.serviceSection} style={{ minHeight: "550px" }}>
+        <Image
+          src="/images/exterior-pension-calc-bg.jpg"
+          alt=""
+          fill
+          className={styles.serviceBg}
+          sizes="100vw"
+        />
+        <div className={`${styles.serviceScrim} ${styles.serviceScrimFull}`} />
+        <div className={styles.serviceContent}>
           <Reveal>
-            <span className={homeStyles.eyebrow}>Plan Pensional</span>
-            <h2 className={homeStyles.h2}>Simula tu pensión desde el exterior</h2>
-            <p className={homeStyles.sub}>
+            <span className={homeStyles.eyebrow} style={{ color: "var(--color-primary)" }}>
+              Plan Pensional
+            </span>
+            <h2 className={homeStyles.h2} style={{ color: "#fff" }}>
+              Simula tu pensión desde el exterior
+            </h2>
+            <p className={homeStyles.sub} style={{ color: "rgba(255,255,255,0.75)" }}>
               Calcula tu aporte voluntario a Pensión y proyecta con cuánto te
               pensionarías si sigues cotizando desde donde estás.
             </p>
           </Reveal>
           <div style={{ marginTop: 32 }}>
             <Reveal delay={150} as="div" className={calcPageStyles.card}>
-              <Calculadora defaultExterior />
+              <Calculadora defaultExterior showAportes={false} />
             </Reveal>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </>
   );
 }

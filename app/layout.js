@@ -22,6 +22,13 @@ const roboto = localFont({
   fallback: ["Arial", "system-ui", "sans-serif"],
 });
 
+const sequel100Black = localFont({
+  src: [{ path: "./fonts/Sequel100Black-76.ttf", weight: "900", style: "normal" }],
+  variable: "--font-sequel",
+  display: "swap",
+  fallback: ["Archivo", "system-ui", "sans-serif"],
+});
+
 export const metadata = {
   metadataBase: new URL("https://afiliamosya.com"),
   title: {
@@ -44,7 +51,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" className={`${dinAlternate.variable} ${roboto.variable}`}>
+    <html lang="es" className={`${dinAlternate.variable} ${roboto.variable} ${sequel100Black.variable}`}>
       <body>
         <ScrollToTop />
         {children}

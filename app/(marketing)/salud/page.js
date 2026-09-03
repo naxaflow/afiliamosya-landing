@@ -23,6 +23,7 @@ export default function Page() {
       title="Afiliación y gestión en Salud"
       image="/images/salud-hero.jpg"
       titleColor="#fff"
+      eyebrowColor="#FF7700"
       imagePosition="center 15%"
       lede="La Salud es uno de los componentes fundamentales del Sistema de Seguridad Social. En Afiliamos Ya brindamos acompañamiento en procesos relacionados con la afiliación y gestión ante las EPS, de acuerdo con la situación particular de cada persona."
       sectionMinHeight="680px"

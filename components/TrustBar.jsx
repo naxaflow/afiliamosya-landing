@@ -39,16 +39,20 @@ const TRUST_ITEMS = [
   },
 ];
 
-export default function TrustBar() {
+export default function TrustBar({ message }) {
   return (
     <div className={styles.trustBar}>
       <Reveal as="div" className={styles.inner}>
-        {TRUST_ITEMS.map((i) => (
-          <div className={styles.item} key={i.t}>
-            {i.icon}
-            {i.t}
-          </div>
-        ))}
+        {message ? (
+          <p className={styles.message}>{message}</p>
+        ) : (
+          TRUST_ITEMS.map((i) => (
+            <div className={styles.item} key={i.t}>
+              {i.icon}
+              {i.t}
+            </div>
+          ))
+        )}
       </Reveal>
     </div>
   );

@@ -31,9 +31,9 @@ export default function CalculadoraPage() {
       </div>
 
       <div className={styles.wrap}>
-        <div className={styles.card}>
-          <Calculadora />
-        </div>
+        <Reveal delay={150} as="div" className={styles.card}>
+          <Calculadora showModalidad={false} showPensionProjection={false} />
+        </Reveal>
       </div>
     </>
   );

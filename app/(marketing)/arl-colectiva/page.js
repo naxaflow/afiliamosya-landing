@@ -1,4 +1,5 @@
 import ServicioPage from "@/components/ServicioPage";
+import Reveal from "@/components/Reveal";
 import styles from "@/components/ServicioPage.module.css";
 
 export const metadata = {
@@ -23,6 +24,7 @@ export default function Page() {
       title="Protección frente a Riesgos Laborales"
       image="/images/arl-hero.jpg"
       titleColor="#fff"
+      eyebrowColor="#FF7700"
       lede="La ARL – Administradora de Riesgos Laborales tiene como finalidad gestionar la protección frente a los riesgos derivados de las actividades laborales. En Afiliamos Ya acompañamos los procesos de afiliación a ARL para trabajadores y personas independientes, de acuerdo con la actividad económica y las condiciones aplicables."
       sectionMinHeight="680px"
       servicios={SERVICIOS}
@@ -31,7 +33,7 @@ export default function Page() {
       ctaMensaje="Hola ¡Afiliamos Ya!, quiero información sobre mi afiliación a ARL colectiva. Autorizo que me contacten por este medio."
       ctaBoton="Solicitar información"
       extra={
-        <div className={styles.calloutDark}>
+        <Reveal delay={150} as="div" className={styles.calloutDark}>
           <span className={styles.icon}>◆</span>
           <div>
             <h3>La ARL no la da cualquiera</h3>
@@ -43,7 +45,7 @@ export default function Page() {
               protegiendo independientes.
             </p>
           </div>
-        </div>
+        </Reveal>
       }
     />
   );

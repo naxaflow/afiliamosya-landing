@@ -10,7 +10,7 @@ import styles from "./Reveal.module.css";
  * disparado por scroll (IntersectionObserver) en vez de solo al cargar,
  * para que funcione en contenido que empieza fuera de la vista.
  */
-export default function Reveal({ children, delay = 0, as: Tag = "div", className }) {
+export default function Reveal({ children, delay = 0, as: Tag = "div", className, style }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(
     () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -38,7 +38,7 @@ export default function Reveal({ children, delay = 0, as: Tag = "div", className
     <Tag
       ref={ref}
       className={`${styles.reveal} ${visible ? styles.visible : ""} ${className || ""}`}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+      style={delay ? { ...style, transitionDelay: `${delay}ms` } : style}
     >
       {children}
     </Tag>
