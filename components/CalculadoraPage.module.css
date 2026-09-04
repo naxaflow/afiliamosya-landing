@@ -1,14 +1,41 @@
-.banner {
-  background: var(--color-primary);
-  padding: 64px 28px 96px;
-  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
+.pageBg {
+  position: relative;
+}
+
+.pageBgFixed {
+  position: fixed;
+  top: 114px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.pageBgImg {
+  object-fit: cover;
+}
+
+.pageBgScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.3) 55%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
+}
+
+.heroContent {
   position: relative;
   z-index: 1;
+  padding: 64px 28px 96px;
 }
 
 .bannerInner {
   max-width: 1080px;
   margin: 0 auto;
+  width: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -21,7 +48,8 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.55);
+  color: var(--color-primary);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
 }
 
 .title {
@@ -29,19 +57,23 @@
   margin-top: 10px;
   font-size: clamp(2rem, 4.2vw, 3rem);
   max-width: 20ch;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
 }
 
 .sub {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 1.02rem;
   margin-top: 14px;
   max-width: 48ch;
   font-family: var(--font-body);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
 }
 
 .badge {
   flex: 0 0 auto;
-  background: rgba(0, 0, 0, 0.16);
+  align-self: flex-start;
+  margin-left: 1in;
+  background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 14px;
   padding: 14px 20px;
@@ -66,12 +98,16 @@
 .wrap {
   max-width: 1080px;
   margin: -64px auto 0;
-  padding: 0 28px 64px;
+  padding: 0.5in 28px 120px;
   position: relative;
-  z-index: 2;
+  z-index: 1;
 }
 
 .card {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
   background: #fff;
   border-radius: 20px;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.14);
@@ -79,13 +115,17 @@
 }
 
 @media (max-width: 700px) {
-  .banner {
-    padding: 44px 20px 80px;
+  .pageBgFixed {
+    top: 101px;
+  }
+
+  .heroContent {
+    padding: 44px 20px 64px;
   }
 
   .wrap {
     margin-top: -52px;
-    padding: 0 16px 48px;
+    padding: 0.5in 16px 64px;
   }
 
   .badge {

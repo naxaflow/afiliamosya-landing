@@ -48,8 +48,8 @@ export default function Page() {
       <ServicioPage
         eyebrow="Colombianos en el Exterior"
         title="Sigue construyendo tu futuro en Colombia, desde donde estés"
-        image="/images/exterior-hero.jpg"
-        imagePosition="center 42%"
+        image="/images/exterior-hero-v2.jpg"
+        imagePosition="center 70%"
         titleColor="#fff"
         eyebrowColor="#FF7700"
         sectionMinHeight="760px"
@@ -141,13 +141,14 @@ export default function Page() {
 
       <TrustBar message={<>Tu futuro no tiene fronteras: sigue construyendo tu <em>pensión</em>, estés donde estés.</>} />
 
-      <section className={styles.serviceSection} style={{ minHeight: "550px" }}>
+      <section className={styles.serviceSection}>
         <Image
-          src="/images/exterior-pension-calc-bg.jpg"
+          src="/images/exterior-hero.jpg"
           alt=""
           fill
           className={styles.serviceBg}
           sizes="100vw"
+          style={{ objectPosition: "center 42%" }}
         />
         <div className={`${styles.serviceScrim} ${styles.serviceScrimFull}`} />
         <div className={styles.serviceContent}>

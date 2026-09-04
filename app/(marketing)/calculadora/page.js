@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Calculadora from "@/components/Calculadora";
 import Reveal from "@/components/Reveal";
 import styles from "@/components/CalculadoraPage.module.css";
@@ -11,8 +12,20 @@ export const metadata = {
 
 export default function CalculadoraPage() {
   return (
-    <>
-      <div className={styles.banner}>
+    <div className={styles.pageBg}>
+      <div className={styles.pageBgFixed}>
+        <Image
+          src="/images/calculadora-page-bg-v2.jpg"
+          alt=""
+          fill
+          priority
+          className={styles.pageBgImg}
+          sizes="100vw"
+        />
+        <div className={styles.pageBgScrim} />
+      </div>
+
+      <div className={styles.heroContent}>
         <Reveal as="div" className={styles.bannerInner}>
           <div>
             <span className={styles.eyebrow}>Calculadora 2026</span>
@@ -35,6 +48,6 @@ export default function CalculadoraPage() {
           <Calculadora showModalidad={false} showPensionProjection={false} />
         </Reveal>
       </div>
-    </>
+    </div>
   );
 }
