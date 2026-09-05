@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import {
   SMMLV,
@@ -22,12 +22,12 @@ const TIPOS_COTIZANTE = [
   {
     value: "03",
     label: "Independiente por cuenta propia (Tipo 03)",
-    nota: "Trabajas por cuenta propia. Incluye Salud y Pensión — este tipo no incluye ARL.",
+    nota: "Trabajas por cuenta propia. Incluye Salud siempre; Pensión es opcional — este tipo no incluye ARL.",
   },
   {
     value: "57",
     label: "Solo ARL voluntaria (Tipo 57)",
-    nota: "Ya cotizas Salud y Pensión por otro medio; aquí solo afilias tu ARL de forma voluntaria.",
+    nota: "Afilias tu ARL de forma voluntaria. Salud y Pensión son opcionales, por si también quieres cotizarlos aquí.",
   },
   {
     value: "73",
@@ -47,8 +47,6 @@ export default function Calculadora({
   showPensionProjection = true,
   showAportes = true,
 }) {
-  const resultRef = useRef(null);
-  const [resaltar, setResaltar] = useState(false);
   const [ingresos, setIngresos] = useState(SMMLV);
   const exterior = defaultExterior;
   const [tipoCotizante, setTipoCotizante] = useState("59");
@@ -76,25 +74,30 @@ export default function Calculadora({
   const [loadingUsd, setLoadingUsd] = useState(false);
   const [usdError, setUsdError] = useState("");
 
-  // Tipos 03 y 73 siempre incluyen Salud+Pensión sin ARL; tipo 57 es solo ARL.
-  // El tipo 59 (o exterior/completo) deja que el usuario elija con los checks.
-  const effSalud = es03 || es73 ? true : es57 ? false : salud;
-  const effPension = es03 || es73 ? true : es57 ? false : pension;
-  const effArl = es57 ? true : es03 || es73 ? false : arl;
+  // Tipos 03 y 73 siempre incluyen Salud sin ARL. El tipo 57 siempre
+  // incluye ARL, y deja Salud y Pensión como opcionales (checkbox).
+  // Pensión es opcional (checkbox) en el tipo 03, igual que en el 59.
+  // El tipo 73 siempre incluye Pensión, y deja ARL como opcional
+  // (checkbox) con riesgo fijo en III. El tipo 59 (o exterior/completo)
+  // deja que el usuario elija todo con los checks.
+  const effSalud = es03 || es73 ? true : salud;
+  const effPension = es73 ? true : pension;
+  const effArl = es57 ? true : es03 ? false : arl;
+  const effRiesgo = es73 ? "III" : riesgo;
   const ingresosEfectivos = es73 ? SMMLV : ingresos;
 
-  const opts = { exterior, salud: effSalud, pension: effPension, arl: effArl, riesgo, caja, cajaRate };
+  const opts = { exterior, salud: effSalud, pension: effPension, arl: effArl, riesgo: effRiesgo, caja, cajaRate };
   const r = useMemo(
     () => liquidar(ingresosEfectivos, opts),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [ingresosEfectivos, exterior, effSalud, effPension, effArl, riesgo, caja, cajaRate]
+    [ingresosEfectivos, exterior, effSalud, effPension, effArl, effRiesgo, caja, cajaRate]
   );
   const flooredMin = ingresosEfectivos * 0.4 < SMMLV;
 
   const diasNum = Math.min(30, Math.max(0, Number(dias) || 0));
   const r76 = useMemo(
-    () => liquidarCotizante76({ dias: diasNum, riesgo, cajaRate, salud, pension, arl }),
-    [diasNum, riesgo, cajaRate, salud, pension, arl]
+    () => liquidarCotizante76({ dias: diasNum, riesgo, cajaRate, salud: true, pension, arl }),
+    [diasNum, riesgo, cajaRate, pension, arl]
   );
 
   const edadNum = Number(edadActual) || 0;
@@ -110,12 +113,6 @@ export default function Calculadora({
     () => proyectarPension({ sexo, edadActual: edadNum, semanasCotizadas: semanasNum, ibl: ibcActual }),
     [sexo, edadNum, semanasNum, ibcActual]
   );
-
-  function calcular() {
-    resultRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-    setResaltar(true);
-    setTimeout(() => setResaltar(false), 900);
-  }
 
   async function toggleUsd() {
     if (showUsd) {
@@ -151,13 +148,14 @@ export default function Calculadora({
       `Trabajé ${diasNum} días este mes (ARL riesgo ${riesgo}). ` +
       `Autorizo que me contacten por este medio para mi cotización.`
     : `Hola ¡Afiliamos Ya!, quiero afiliarme a seguridad social como independiente (${tipoInfo.label}). ` +
-      `Mis ingresos aprox. son ${cop(ingresosEfectivos)}/mes${effArl ? ` (ARL riesgo ${riesgo})` : ""}. ` +
+      `Mis ingresos aprox. son ${cop(ingresosEfectivos)}/mes${effArl ? ` (ARL riesgo ${effRiesgo})` : ""}. ` +
       `Autorizo que me contacten por este medio para mi cotización.`;
 
   const pensionMsg =
     `Hola ¡Afiliamos Ya!, quiero asesoría sobre mi pensión. Tengo ${edadNum} años (${sexo}), ` +
     `${semanasNum} semanas cotizadas, y me faltarían ${proyeccionIbc.semanasRestantes} semanas más. ` +
     `Autorizo que me contacten por este medio.`;
+
 
   return (
     <>
@@ -217,10 +215,7 @@ export default function Calculadora({
             </div>
 
             <label className={styles.label}>¿Qué incluye tu aporte?</label>
-            <label className={styles.check}>
-              <input type="checkbox" checked={salud} onChange={(e) => setSalud(e.target.checked)} />
-              Salud (12,5%)
-            </label>
+            <div className={styles.note}>Salud (12,5%) — obligatoria en este tipo.</div>
             <label className={styles.check}>
               <input type="checkbox" checked={pension} onChange={(e) => setPension(e.target.checked)} />
               Pensión (16%)
@@ -303,7 +298,7 @@ export default function Calculadora({
             )}
 
             <label className={styles.label}>¿Qué incluye tu aporte?</label>
-            {es59 && !exterior && (
+            {(es59 || es57) && !exterior && (
               <label className={styles.check}>
                 <input
                   type="checkbox"
@@ -316,30 +311,36 @@ export default function Calculadora({
             {(es03 || es73) && (
               <div className={styles.note}>Salud (12,5%) — incluida siempre en este tipo.</div>
             )}
-            {es59 && (
+            {(es59 || es03 || es57) && (
               <label className={styles.check}>
                 <input type="checkbox" checked={pension} onChange={(e) => setPension(e.target.checked)} />
                 Pensión (16%) — desmárcala si ya está pensionado
               </label>
             )}
-            {(es03 || es73) && (
+            {es73 && (
               <div className={styles.note}>Pensión (16%) — incluida siempre en este tipo.</div>
             )}
             {es59 && (
               <label className={styles.check}>
                 <input type="checkbox" checked={arl} onChange={(e) => setArl(e.target.checked)} />
-                ARL — voluntaria, salvo alto riesgo (IV o V)
+                ARL — voluntaria
+              </label>
+            )}
+            {es73 && (
+              <label className={styles.check}>
+                <input type="checkbox" checked={arl} onChange={(e) => setArl(e.target.checked)} />
+                ARL — opcional, riesgo III
               </label>
             )}
             {es03 && (
               <div className={styles.note}>Este tipo de cotizante no incluye ARL.</div>
             )}
 
-            {(effArl) && (
+            {(effArl && !es73) && (
               <>
                 <label className={styles.label}>Nivel de riesgo (ARL)</label>
                 <div className={styles.risk}>
-                  {["I", "II", "III", "IV", "V"].map((k) => (
+                  {(es59 ? ["I", "II", "III"] : ["I", "II", "III", "IV", "V"]).map((k) => (
                     <button
                       key={k}
                       type="button"
@@ -350,11 +351,13 @@ export default function Calculadora({
                     </button>
                   ))}
                 </div>
-                <div className={styles.note}>
-                  {es57
-                    ? "La ARL es obligatoria en este tipo de cotizante."
-                    : "Conductores y transportadores suelen ser clase IV o V."}
-                </div>
+                {!es59 && (
+                  <div className={styles.note}>
+                    {es57
+                      ? "La ARL es obligatoria en este tipo de cotizante."
+                      : "Conductores y transportadores suelen ser clase IV o V."}
+                  </div>
+                )}
               </>
             )}
 
@@ -399,17 +402,14 @@ export default function Calculadora({
           </>
         )}
 
-        <button type="button" className={styles.btnCalcular} onClick={calcular}>
-          Calcular mi aporte
-        </button>
+        <div className={styles.helpBox}>
+          <p>Si no estás seguro qué debes cotizar, envíanos un mensaje al WhatsApp.</p>
+        </div>
       </div>
 
       <div className={styles.out}>
         <div className={styles.outLabel}>Tu resultado</div>
-        <div
-          ref={resultRef}
-          className={`${styles.offerCard} ${resaltar ? styles.offerCardResaltada : ""}`}
-        >
+        <div className={styles.offerCard}>
         {esDias76 ? (
           <>
             <div className={styles.row}>
@@ -467,7 +467,7 @@ export default function Calculadora({
             )}
             {r.arl > 0 && (
               <div className={styles.row}>
-                <span>ARL (riesgo {riesgo})</span>
+                <span>ARL (riesgo {effRiesgo})</span>
                 <b>{cop(r.arl)}</b>
               </div>
             )}
@@ -510,15 +510,10 @@ export default function Calculadora({
           {usdError && <div className={styles.usdErrorMsg}>{usdError}</div>}
         </div>
         </div>
-        {esDias76 ? (
+        {esDias76 && (
           <div className={styles.note}>
             Cotizante 76 — trabajador de tiempo parcial independiente. Verifica siempre
             la normativa y parametrización vigente del operador PILA antes de pagar.
-          </div>
-        ) : (
-          <div className={styles.note}>
-            + gestión ¡Afiliamos Ya!: $29.900/mes — afiliación, planilla, soporte y
-            ARL incluida.
           </div>
         )}
         <WhatsAppButton mensaje={cotizaMsg} className={styles.btnWa}>
