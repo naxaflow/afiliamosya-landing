@@ -27,14 +27,29 @@ export default function ServicioPage({
   sectionMinHeight,
   showTrustBar = true,
   extra,
+  extraSection,
   ledeAfterExtra = false,
   heroBadge = false,
   ledeCentered = false,
   ledeColor,
   ledeMarginTop,
+  ledeMaxWidth,
+  ledeTitle,
+  ledeTextMarginTop,
   ctaBoxMarginTop,
   listaMarginTop,
+  listaPaddingTop,
+  closingColor,
+  closingCentered = false,
+  closingMarginTop,
 }) {
+  const closingStyle = {
+    ...(closingCentered
+      ? { textAlign: "center", marginLeft: "auto", marginRight: "auto", maxWidth: "none", whiteSpace: "nowrap" }
+      : undefined),
+    ...(closingColor ? { color: closingColor } : undefined),
+    ...(closingMarginTop ? { marginTop: closingMarginTop } : undefined),
+  };
   const ledeStyle = {
     ...(image ? { marginTop: 0 } : undefined),
     ...(ledeCentered
@@ -42,11 +57,30 @@ export default function ServicioPage({
       : undefined),
     ...(ledeColor ? { color: ledeColor } : undefined),
     ...(ledeMarginTop ? { marginTop: ledeMarginTop } : undefined),
+    ...(ledeMaxWidth ? { maxWidth: ledeMaxWidth } : undefined),
   };
+  const ledeParagraphs = typeof lede === "string" ? lede.split("\n\n") : [lede];
   const ledeP = (
-    <p className={homeStyles.sub} style={ledeStyle}>
-      {lede}
-    </p>
+    <>
+      {ledeTitle && (
+        <h2 className={homeStyles.h2} style={ledeStyle}>
+          {ledeTitle}
+        </h2>
+      )}
+      {ledeParagraphs.map((parrafo, i) => (
+        <p
+          key={i}
+          className={homeStyles.sub}
+          style={
+            i === 0 && !ledeTitle
+              ? ledeStyle
+              : { ...ledeStyle, marginTop: i === 0 ? ledeTextMarginTop || 14 : 14 }
+          }
+        >
+          {parrafo}
+        </p>
+      ))}
+    </>
   );
   return (
     <>
@@ -84,6 +118,14 @@ export default function ServicioPage({
 
       {showTrustBar && <TrustBar />}
 
+      {extraSection && (
+        <div className={styles.extraSection}>
+          <Reveal as="div" className={styles.extraSectionInner}>
+            {extraSection}
+          </Reveal>
+        </div>
+      )}
+
       <section
         className={homeStyles.section}
         style={sectionMinHeight ? { minHeight: sectionMinHeight } : undefined}
@@ -112,7 +154,10 @@ export default function ServicioPage({
           delay={150}
           as="ul"
           className={styles.lista}
-          style={listaMarginTop ? { marginTop: listaMarginTop } : undefined}
+          style={{
+            ...(listaMarginTop ? { marginTop: listaMarginTop } : undefined),
+            ...(listaPaddingTop ? { paddingTop: listaPaddingTop } : undefined),
+          }}
         >
           {servicios.map((t) => (
             <li key={t}>
@@ -125,7 +170,7 @@ export default function ServicioPage({
         </Reveal>
 
         {closing && (
-          <Reveal delay={200} as="p" className={styles.closing}>
+          <Reveal delay={200} as="p" className={styles.closing} style={closingStyle}>
             {closing}
           </Reveal>
         )}

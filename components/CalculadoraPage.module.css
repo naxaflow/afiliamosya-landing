@@ -82,16 +82,17 @@
 }
 
 .badgeNum {
-  font-family: var(--font-display);
-  font-weight: 700;
+  font-family: var(--font-sequel);
+  font-weight: 900;
   font-size: 1.6rem;
   line-height: 1;
+  color: #fff;
 }
 
 .badgeLabel {
-  font-size: 0.72rem;
+  font-size: 14px;
   margin-top: 4px;
-  color: rgba(255, 255, 255, 0.85);
+  color: #fff;
   max-width: 16ch;
 }
 
@@ -105,13 +106,39 @@
 
 .card {
   max-width: 900px;
-  margin: 0 auto;
+  margin: -0.55in auto 0;
   position: relative;
   z-index: 1;
   background: #fff;
   border-radius: 20px;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.14);
   overflow: hidden;
+}
+
+.topPromo {
+  display: block;
+  max-width: 1080px;
+  margin: 0 auto 28px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 16px 22px;
+  text-align: center;
+}
+
+.topPromoTitle {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 30px;
+  color: var(--color-primary);
+}
+
+.topPromoText {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--color-ink);
 }
 
 @media (max-width: 700px) {

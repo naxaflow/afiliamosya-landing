@@ -26,6 +26,14 @@ export default function CalculadoraPage() {
       </div>
 
       <div className={styles.heroContent}>
+        <Reveal as="div" className={styles.topPromo}>
+          <span className={styles.topPromoTitle}>¿Atrasado con tu planilla? Nosotros te ayudamos</span>
+          <span className={styles.topPromoText}>
+            Corregimos novedades, ponemos al día periodos atrasados y resolvemos deudas
+            en mora.
+          </span>
+        </Reveal>
+
         <Reveal as="div" className={styles.bannerInner}>
           <div>
             <span className={styles.eyebrow}>Calculadora 2026</span>

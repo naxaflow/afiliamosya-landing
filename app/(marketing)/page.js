@@ -6,7 +6,6 @@ import TrustBar from "@/components/TrustBar";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import ComunidadForm from "@/components/ComunidadForm";
 import CTAFinal from "@/components/CTAFinal";
-import LeadForm from "@/components/LeadForm";
 import Reveal from "@/components/Reveal";
 import styles from "@/components/Home.module.css";
 
@@ -116,21 +115,25 @@ export default function HomePage() {
         />
         <div className={styles.quienesGrid}>
           <Reveal>
-            <span className={`${styles.eyebrow} ${styles.eyebrowDark}`}>Quiénes somos</span>
-            <h2 className={`${styles.h2} ${styles.h2Orange}`}>Empresa de confianza, con más de 25 años en Seguridad Social</h2>
+            <span className={styles.eyebrow} style={{ color: "var(--color-primary)" }}>Quiénes somos</span>
+            <h2 className={styles.h2}>
+              Empresa de <span style={{ color: "var(--color-primary)" }}>confianza</span>, con más
+              de <span style={{ color: "var(--color-primary)" }}>25</span> años en{" "}
+              <span style={{ color: "var(--color-primary)" }}>Seguridad Social</span>
+            </h2>
             <p>
-              ¡Afiliamos Ya! es una unidad de Multiservice Colombia dedicada
-              exclusivamente a ayudarte a estar en regla con tu Seguridad
-              Social — salud, pensión, riesgos laborales y caja de
-              compensación — sin que tengas que entender toda la letra menuda
-              de la ley.
+              ¡Afiliamos Ya! es una empresa especializada en gestión de seguridad social,
+              dedicada a que trabajadores independientes y empresas estén al día con sus
+              obligaciones de salud, pensión, riesgos laborales y caja de compensación, sin
+              necesidad de interpretar la normatividad vigente por su cuenta.
             </p>
             <p>
-              Operamos a través de una agremiación autorizada por el
-              Ministerio de Salud, lo que nos permite ofrecerte ARL colectiva
-              real, no solo liquidar tu PILA como cualquier app. Detrás de
-              cada afiliación hay un equipo que te responde por WhatsApp, no
-              un formulario que desaparece.
+              Con más de 25 años de experiencia en el sector, operamos a través de una
+              agremiación autorizada por el Ministerio de Salud — lo que nos permite ofrecer
+              ARL colectiva real, una cobertura que va más allá de la simple liquidación de
+              PILA que ofrecen las plataformas de autoliquidación. Cada afiliación está
+              respaldada por un equipo de asesores disponible por WhatsApp, no por un
+              formulario sin seguimiento.
             </p>
           </Reveal>
           <Reveal delay={150} className={styles.statsCol}>
@@ -146,14 +149,20 @@ export default function HomePage() {
               <div className={styles.statNum}>&lt;30 min</div>
               <div className={styles.statLabel}>Tiempo de respuesta promedio por WhatsApp</div>
             </div>
+            <WhatsAppButton
+              mensaje="Hola ¡Afiliamos Ya!, quiero más información sobre sus servicios de Seguridad Social."
+              className={styles.statsCtaBtn}
+            >
+              Más información
+            </WhatsAppButton>
           </Reveal>
         </div>
       </section>
 
       <div className={styles.sectionGray}>
-        <section className={styles.section} style={{ minHeight: "710px" }}>
+        <section className={styles.section} style={{ minHeight: "600px" }}>
           <Reveal>
-            <span className={`${styles.eyebrow} ${styles.eyebrowDark}`}>Lo que hacemos</span>
+            <span className={styles.eyebrow} style={{ color: "var(--color-primary)" }}>Lo que hacemos</span>
             <h2 className={styles.h2}>Servicios que ofrecemos</h2>
             <p className={styles.sub}>
               Cada servicio tiene su propia gestión — entra al que te
@@ -177,7 +186,7 @@ export default function HomePage() {
 
       <section className={styles.section} style={{ minHeight: "675px" }}>
         <Reveal>
-          <span className={styles.eyebrow}>Seguridad social</span>
+          <span className={styles.eyebrow} style={{ color: "var(--color-primary)" }}>Seguridad social</span>
           <h2 className={`${styles.h2} ${styles.h2Dark}`}>Un solo lugar para tus aportes</h2>
           <p className={styles.sub}>
             En Afiliamos Ya facilitamos la gestión de la Seguridad Social para
@@ -235,7 +244,7 @@ export default function HomePage() {
         <section className={styles.section} style={{ minHeight: "675px" }}>
           <div className={styles.quienesGrid}>
             <Reveal>
-              <span className={styles.eyebrow}>Referidos</span>
+              <span className={styles.eyebrow} style={{ color: "var(--color-primary)" }}>Referidos</span>
               <h2 className={styles.h2}>Comparte la voz</h2>
               <p className={styles.highlight}>Refiere una persona, gana $50,000 COP</p>
               <p className={styles.sub}>
@@ -267,7 +276,7 @@ export default function HomePage() {
 
       <section className={styles.section} style={{ minHeight: "680px" }}>
         <Reveal>
-          <span className={styles.eyebrow}>Cómo pagas</span>
+          <span className={styles.eyebrow} style={{ color: "var(--color-primary)" }}>Cómo pagas</span>
           <h2 className={styles.h2}>Paga tu planilla fácil</h2>
           <p className={styles.sub}>
             Con nuestro operador de pagos, ASOPAGOS S.A., y los medios que ya usas
@@ -286,7 +295,7 @@ export default function HomePage() {
         </Reveal>
 
         <Reveal delay={150} className={styles.faqIntro}>
-          <span className={styles.eyebrow}>Preguntas frecuentes</span>
+          <span className={styles.eyebrow} style={{ color: "var(--color-primary)" }}>Preguntas frecuentes</span>
           <h2 className={styles.h2}>Lo que todo independiente pregunta</h2>
         </Reveal>
         <Reveal delay={250} className={styles.faq}>
@@ -298,14 +307,6 @@ export default function HomePage() {
           ))}
         </Reveal>
       </section>
-
-      <div className={styles.sectionAlt}>
-        <section className={styles.section}>
-          <Reveal>
-            <LeadForm origen="home" />
-          </Reveal>
-        </section>
-      </div>
 
       <CTAFinal />
     </>

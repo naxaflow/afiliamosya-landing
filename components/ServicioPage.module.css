@@ -127,6 +127,91 @@
   font-family: var(--font-body);
 }
 
+/* sección independiente entre el belt y el contenido principal, usada
+   vía la prop "extraSection" en páginas de servicio individuales */
+.extraSection {
+  background: var(--color-surface);
+}
+
+.extraSectionInner {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 56px 28px;
+}
+
+/* bloque de confianza/trayectoria — título + párrafo, usado vía las
+   props "extra"/"extraSection" en páginas de servicio individuales */
+.trustTitle {
+  margin-top: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  color: var(--color-ink);
+  max-width: none;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.trustTitleAccent {
+  color: var(--color-primary);
+}
+
+.trustText {
+  margin-top: calc(14px + 0.3in);
+  color: var(--color-gray);
+  max-width: none;
+  font-family: var(--font-body);
+  text-align: center;
+}
+
+.epsLogos {
+  list-style: none;
+  margin: 48px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 32px 40px;
+}
+
+.epsLogos li {
+  display: flex;
+  align-items: center;
+}
+
+.epsLogoImg {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+@media (max-width: 560px) {
+  .epsLogoImg {
+    height: 32px;
+  }
+}
+
+.epsNote {
+  margin-top: calc(40px + 0.3in);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--color-ink);
+  text-align: center;
+}
+
+.epsNoteAccent {
+  color: var(--color-primary);
+}
+
+.epsCtaWrap {
+  display: flex;
+  justify-content: center;
+  margin-top: calc(32px + 0.15in);
+}
+
 .ctaBox {
   margin-top: 32px;
   border: 1px solid var(--color-gray-light);
@@ -155,7 +240,7 @@
 /* callout oscuro — para el diferenciador de ARL (único bloque negro en las
    páginas de servicio, reservado a este mensaje recurrente) */
 .calloutDark {
-  margin-top: 28px;
+  margin-top: calc(28px + 0.25in);
   background: var(--color-ink);
   color: #fff;
   border-radius: 14px;

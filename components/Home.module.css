@@ -33,7 +33,7 @@
 
 .quienesSection {
   position: relative;
-  min-height: 630px;
+  min-height: 600px;
   justify-content: flex-start;
 }
 
@@ -180,6 +180,7 @@
   font-size: 1.02rem;
   margin-top: 16px;
   font-family: var(--font-body);
+  text-align: justify;
 }
 
 .quienesGrid p:first-of-type {
@@ -210,6 +211,10 @@
   font-size: 0.88rem;
   margin-top: 6px;
   font-family: var(--font-body);
+}
+
+.statsCtaBtn {
+  align-self: flex-start;
 }
 
 .pilaresLedger {
