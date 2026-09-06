@@ -7,7 +7,7 @@ export const metadata = {
   title: "Calculadora de aportes 2026",
   description:
     "Calcula tu aporte mensual de ley a salud, pensión, ARL y caja de compensación como independiente en Colombia, con los valores oficiales 2026.",
-  openGraph: { url: "/calculadora" },
+  openGraph: { url: "/calculadora", images: ["/og-image.png"] },
 };
 
 export default function CalculadoraPage() {

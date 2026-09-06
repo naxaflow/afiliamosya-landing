@@ -5,7 +5,7 @@ import styles from "@/components/Legal.module.css";
 export const metadata = {
   title: "Términos y Condiciones",
   description: "Condiciones de uso del sitio web de ¡Afiliamos Ya! y de sus servicios de gestión de Seguridad Social.",
-  openGraph: { url: "/terminos" },
+  openGraph: { url: "/terminos", images: ["/og-image.png"] },
   robots: { index: true, follow: true },
 };
 

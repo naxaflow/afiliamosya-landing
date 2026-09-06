@@ -7,7 +7,7 @@ export const metadata = {
   title: "Contacto",
   description:
     "Escríbenos por WhatsApp, correo o teléfono. Un asesor de ¡Afiliamos Ya! te contacta en menos de 30 minutos.",
-  openGraph: { url: "/contacto" },
+  openGraph: { url: "/contacto", images: ["/og-image.png"] },
 };
 
 export default function ContactoPage() {

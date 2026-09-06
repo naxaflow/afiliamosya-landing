@@ -6,7 +6,7 @@ export const metadata = {
   title: "Política de Privacidad",
   description:
     "Cómo ¡Afiliamos Ya! recolecta, usa y protege tus datos personales, conforme a la Ley 1581 de 2012.",
-  openGraph: { url: "/privacidad" },
+  openGraph: { url: "/privacidad", images: ["/og-image.png"] },
   robots: { index: true, follow: true },
 };
 

@@ -7,7 +7,7 @@ export const metadata = {
   title: "Salud",
   description:
     "Afiliación, traslados, reingresos y novedades ante tu EPS. Acompañamiento en Salud para independientes y dependientes.",
-  openGraph: { url: "/salud" },
+  openGraph: { url: "/salud", images: ["/og-image.png"] },
 };
 
 const EPS_LOGOS = [

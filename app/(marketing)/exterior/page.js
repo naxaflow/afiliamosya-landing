@@ -12,7 +12,7 @@ export const metadata = {
   title: "Colombianos en el Exterior",
   description:
     "Cobertura de Salud para tu familia en Colombia y Plan Pensional para colombianos en el exterior, con aportes voluntarios conforme al Decreto 682 de 2014.",
-  openGraph: { url: "/exterior" },
+  openGraph: { url: "/exterior", images: ["/og-image.png"] },
 };
 
 const SERVICIOS = [

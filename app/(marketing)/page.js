@@ -18,6 +18,7 @@ export const metadata = {
     description:
       "Salud, pensión y ARL al día. Solo una agremiación autorizada puede darte ARL. Cotiza por WhatsApp.",
     url: "/",
+    images: ["/og-image.png"],
   },
 };
 

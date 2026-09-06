@@ -60,7 +60,7 @@ export const metadata = {
   title: "Independientes",
   description:
     "Gestión de EPS, ARL, Pensión y PILA para contratistas y trabajadores independientes. Incluye Afiliamos Ya Premium.",
-  openGraph: { url: "/independientes" },
+  openGraph: { url: "/independientes", images: ["/og-image.png"] },
 };
 
 const SERVICIOS_ICONOS = [

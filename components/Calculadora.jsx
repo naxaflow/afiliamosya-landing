@@ -8,7 +8,6 @@ import {
   liquidar,
   liquidarCotizante76,
   proyectarPension,
-  SEMANAS_MINIMAS,
 } from "@/lib/calculadora";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import styles from "./Calculadora.module.css";
@@ -108,11 +107,6 @@ export default function Calculadora({
     () => proyectarPension({ sexo, edadActual: edadNum, semanasCotizadas: semanasNum, ibl: SMMLV }),
     [sexo, edadNum, semanasNum]
   );
-  const ibcActual = esDias76 ? r76.ibc : r.ibc;
-  const proyeccionIbc = useMemo(
-    () => proyectarPension({ sexo, edadActual: edadNum, semanasCotizadas: semanasNum, ibl: ibcActual }),
-    [sexo, edadNum, semanasNum, ibcActual]
-  );
 
   async function toggleUsd() {
     if (showUsd) {
@@ -153,7 +147,8 @@ export default function Calculadora({
 
   const pensionMsg =
     `Hola ¡Afiliamos Ya!, quiero asesoría sobre mi pensión. Tengo ${edadNum} años (${sexo}), ` +
-    `${semanasNum} semanas cotizadas, y me faltarían ${proyeccionIbc.semanasRestantes} semanas más. ` +
+    `${semanasNum} semanas cotizadas, y me faltan ${proyeccionMinimo.aniosRestantes} años ` +
+    `(${proyeccionMinimo.semanasRestantes} semanas trabajando) para llegar a mi edad de pensión. ` +
     `Autorizo que me contacten por este medio.`;
 
 
@@ -596,24 +591,24 @@ export default function Calculadora({
         <>
           <div className={styles.pensionSummary}>
             <span>
-              Edad de pensión: <b>{proyeccionIbc.edadPension} años</b>
+              Edad de pensión: <b>{proyeccionMinimo.edadPension} años</b>
             </span>
             <span>
-              Te faltan: <b>{proyeccionIbc.aniosRestantes} años</b> (
-              {proyeccionIbc.semanasRestantes} semanas)
+              Tiempo hasta tu edad de pensión: <b>{proyeccionMinimo.aniosRestantes} años</b> (
+              {proyeccionMinimo.semanasRestantes} semanas más trabajando)
             </span>
             <span>
-              Semanas proyectadas al pensionarte: <b>{proyeccionIbc.semanasProyectadas}</b>
+              Semanas proyectadas al pensionarte: <b>{proyeccionMinimo.semanasProyectadas}</b>
             </span>
           </div>
 
-          {!proyeccionIbc.cumpleMinimo && (
+          {!proyeccionMinimo.cumpleMinimo && (
             <div className={styles.warnBox}>
               Con estos datos no alcanzarías las{" "}
-              <b>1.300 semanas mínimas</b> exigidas por Colpensiones para
-              pensionarte por vejez en el Régimen de Prima Media. Te
-              faltarían{" "}
-              <b>{SEMANAS_MINIMAS - proyeccionIbc.semanasProyectadas}</b>{" "}
+              <b>{proyeccionMinimo.semanasMinimas.toLocaleString("es-CO")} semanas mínimas</b>{" "}
+              exigidas por Colpensiones para pensionarte por vejez en el
+              Régimen de Prima Media. Te faltarían{" "}
+              <b>{proyeccionMinimo.semanasMinimas - proyeccionMinimo.semanasProyectadas}</b>{" "}
               semanas más — hablar con un asesor te ayuda a ver alternativas
               (seguir cotizando más tiempo, indemnización sustitutiva, o
               traslado de régimen).
@@ -621,7 +616,7 @@ export default function Calculadora({
           )}
 
           <div className={styles.pensionScenarios}>
-            <div className={styles.scenarioCard}>
+            <div className={`${styles.scenarioCard} ${styles.scenarioOn}`}>
               <div className={styles.scenarioLabel}>Cotizando con el salario mínimo</div>
               <div className={styles.scenarioAmt}>
                 {proyeccionMinimo.cumpleMinimo ? cop(proyeccionMinimo.pensionEstimada) : "—"}
@@ -632,22 +627,13 @@ export default function Calculadora({
                   : "No alcanzas las semanas mínimas con este escenario."}
               </div>
             </div>
-            <div className={`${styles.scenarioCard} ${styles.scenarioOn}`}>
-              <div className={styles.scenarioLabel}>Cotizando con tu IBC actual ({cop(ibcActual)})</div>
-              <div className={styles.scenarioAmt}>
-                {proyeccionIbc.cumpleMinimo ? cop(proyeccionIbc.pensionEstimada) : "—"}
-              </div>
-              <div className={styles.scenarioTasa}>
-                {proyeccionIbc.cumpleMinimo
-                  ? `Tasa de reemplazo estimada: ${proyeccionIbc.tasa.toFixed(1)}%`
-                  : "No alcanzas las semanas mínimas con este escenario."}
-              </div>
-            </div>
           </div>
 
-          <WhatsAppButton mensaje={pensionMsg} className={styles.btnWa}>
-            Hablar con un asesor sobre mi pensión
-          </WhatsAppButton>
+          <div style={{ paddingTop: "0.2in" }}>
+            <WhatsAppButton mensaje={pensionMsg} className={styles.btnWa}>
+              Hablar con un asesor sobre mi pensión
+            </WhatsAppButton>
+          </div>
         </>
       )}
     </div>

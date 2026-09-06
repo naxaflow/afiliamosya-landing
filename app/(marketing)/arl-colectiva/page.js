@@ -15,7 +15,7 @@ export const metadata = {
   title: "ARL Colectiva",
   description:
     "ARL colectiva real a través de una agremiación autorizada por el Ministerio de Salud — algo que ninguna app de autoliquidación puede ofrecer.",
-  openGraph: { url: "/arl-colectiva" },
+  openGraph: { url: "/arl-colectiva", images: ["/og-image.png"] },
 };
 
 const SERVICIOS = [
