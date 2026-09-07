@@ -99,7 +99,7 @@
 .wrap {
   max-width: 1080px;
   margin: -64px auto 0;
-  padding: 0.5in 28px 120px;
+  padding: 0.5in 28px 30px;
   position: relative;
   z-index: 1;
 }

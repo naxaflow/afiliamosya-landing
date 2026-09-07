@@ -196,7 +196,8 @@ export default function Page() {
       <div className={homeStyles.sectionGray}>
         <section className={styles.stepsSection}>
           <Reveal as="h2" className={styles.stepsTitle}>
-            Deja tu Seguridad Social en Manos de un Profesional en 3 Pasos
+            Deja tu <span className={styles.stepsTitleAccent}>Seguridad Social</span> en Manos de
+            un Profesional en <span className={styles.stepsTitleAccent}>3 Pasos</span>
           </Reveal>
           <div className={styles.stepsGrid}>
             {PREMIUM_PASOS.map((p, i) => (

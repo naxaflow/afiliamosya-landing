@@ -306,6 +306,18 @@
   margin-top: 20px;
 }
 
+.ibcDiferenteBox {
+  margin-top: 20px;
+  padding: 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-gray-light);
+  border-radius: 10px;
+}
+
+.ibcDiferenteBox .label {
+  margin-top: 0;
+}
+
 .pensionSummary {
   margin-top: 20px;
   display: flex;
@@ -318,6 +330,30 @@
 .pensionSummary b {
   color: var(--color-ink);
   font-variant-numeric: tabular-nums;
+}
+
+.pensionStatusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 10px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.pensionStatusOn {
+  background: rgba(22, 163, 74, 0.1);
+  border: 1px solid rgba(22, 163, 74, 0.35);
+  color: #15803d;
+}
+
+.pensionStatusOff {
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  color: #991b1b;
 }
 
 .warnBox {

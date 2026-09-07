@@ -550,10 +550,14 @@
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(1.5rem, 4vw, 2rem);
-  color: var(--color-primary);
+  color: var(--color-ink);
   text-align: center;
   margin: 0 0 32px;
   letter-spacing: -0.01em;
+}
+
+.stepsTitleAccent {
+  color: var(--color-primary);
 }
 
 .stepsGrid {

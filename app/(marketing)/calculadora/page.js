@@ -2,6 +2,7 @@ import Image from "next/image";
 import Calculadora from "@/components/Calculadora";
 import Reveal from "@/components/Reveal";
 import styles from "@/components/CalculadoraPage.module.css";
+import servicioStyles from "@/components/ServicioPage.module.css";
 
 export const metadata = {
   title: "Calculadora de aportes 2026",
@@ -52,8 +53,21 @@ export default function CalculadoraPage() {
       </div>
 
       <div className={styles.wrap}>
-        <Reveal delay={150} as="div" className={styles.card}>
+        <div className={styles.card}>
           <Calculadora showModalidad={false} showPensionProjection={false} />
+        </div>
+
+        <Reveal
+          as="h2"
+          className={servicioStyles.stepsTitle}
+          style={{
+            marginTop: "0.6in",
+            color: "#fff",
+            textShadow: "0 2px 8px rgba(0, 0, 0, 0.7)",
+          }}
+        >
+          No tienes que hacer tu Seguridad Social solo y cometer errores. Nosotros estamos acá
+          para ayudarte
         </Reveal>
       </div>
     </div>

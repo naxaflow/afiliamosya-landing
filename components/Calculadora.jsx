@@ -67,6 +67,12 @@ export default function Calculadora({
   const [sexo, setSexo] = useState("hombre");
   const [edadActual, setEdadActual] = useState("");
   const [semanasCotizadas, setSemanasCotizadas] = useState("");
+  // Colpensiones calcula el IBL sobre el promedio indexado de los últimos 10
+  // años cotizados. Si la persona está dentro de esa ventana, su IBC actual
+  // pesa mucho más que el salario mínimo asumido por defecto — se le
+  // pregunta si es distinto para simular con ese valor en vez de 1 SMMLV.
+  const [ibcDiferente, setIbcDiferente] = useState(null); // null | true | false
+  const [ibcPersonalizado, setIbcPersonalizado] = useState("");
 
   const [usdRate, setUsdRate] = useState(null);
   const [showUsd, setShowUsd] = useState(false);
@@ -106,6 +112,20 @@ export default function Calculadora({
   const proyeccionMinimo = useMemo(
     () => proyectarPension({ sexo, edadActual: edadNum, semanasCotizadas: semanasNum, ibl: SMMLV }),
     [sexo, edadNum, semanasNum]
+  );
+  const semanasYaCumplidas = semanasNum >= proyeccionMinimo.semanasMinimas;
+
+  // Dentro de los últimos 10 años antes de la edad de pensión (o ya en
+  // edad de pensionarse), se le pregunta a la persona por su IBC actual
+  // para simular con ese valor en vez del salario mínimo por defecto.
+  const dentroUltimos10Anios = datosPensionCompletos && proyeccionMinimo.aniosRestantes <= 10;
+  const ibcNum = Number(ibcPersonalizado) || 0;
+  const usaIbcPersonalizado = dentroUltimos10Anios && ibcDiferente === true && ibcNum > 0;
+  const iblSimulacion = usaIbcPersonalizado ? Math.max(ibcNum, SMMLV) : SMMLV;
+
+  const proyeccionFinal = useMemo(
+    () => proyectarPension({ sexo, edadActual: edadNum, semanasCotizadas: semanasNum, ibl: iblSimulacion }),
+    [sexo, edadNum, semanasNum, iblSimulacion]
   );
 
   async function toggleUsd() {
@@ -599,8 +619,21 @@ export default function Calculadora({
             </span>
             <span>
               Semanas proyectadas al pensionarte: <b>{proyeccionMinimo.semanasProyectadas}</b>
+              <span
+                className={`${styles.pensionStatusBadge} ${
+                  semanasYaCumplidas ? styles.pensionStatusOn : styles.pensionStatusOff
+                }`}
+              >
+                {semanasYaCumplidas
+                  ? "✓ Ya tienes las semanas requeridas cotizadas"
+                  : "✕ Aún no cumples las semanas requeridas"}
+              </span>
             </span>
           </div>
+
+          {edadNum > 0 && edadNum < proyeccionMinimo.edadPension && (
+            <div className={styles.warnBox}>Todavía no cumples con el requisito de edad</div>
+          )}
 
           {!proyeccionMinimo.cumpleMinimo && (
             <div className={styles.warnBox}>
@@ -615,21 +648,66 @@ export default function Calculadora({
             </div>
           )}
 
+          {dentroUltimos10Anios && (
+            <div className={styles.ibcDiferenteBox}>
+              <label className={styles.label}>
+                Estás dentro de los últimos 10 años antes de tu edad de pensión — Colpensiones
+                calcula tu mesada sobre el promedio de este período. ¿Tu IBC actual es diferente
+                al salario mínimo?
+              </label>
+              <div className={styles.toggle2}>
+                <button
+                  type="button"
+                  className={ibcDiferente === true ? styles.on : ""}
+                  onClick={() => setIbcDiferente(true)}
+                >
+                  Sí
+                </button>
+                <button
+                  type="button"
+                  className={ibcDiferente === false ? styles.on : ""}
+                  onClick={() => setIbcDiferente(false)}
+                >
+                  No
+                </button>
+              </div>
+
+              {ibcDiferente === true && (
+                <>
+                  <label className={styles.label}>Tu IBC actual</label>
+                  <input
+                    className={styles.field}
+                    type="text"
+                    inputMode="numeric"
+                    placeholder="$ 0"
+                    value={ibcPersonalizado ? new Intl.NumberFormat("es-CO").format(ibcNum) : ""}
+                    onFocus={(e) => e.target.select()}
+                    onChange={(e) => setIbcPersonalizado(e.target.value.replace(/\D/g, ""))}
+                  />
+                </>
+              )}
+            </div>
+          )}
+
           <div className={styles.pensionScenarios}>
             <div className={`${styles.scenarioCard} ${styles.scenarioOn}`}>
-              <div className={styles.scenarioLabel}>Cotizando con el salario mínimo</div>
+              <div className={styles.scenarioLabel}>
+                {usaIbcPersonalizado
+                  ? `Cotizando con tu IBC actual (${cop(iblSimulacion)})`
+                  : "Cotizando con el salario mínimo"}
+              </div>
               <div className={styles.scenarioAmt}>
-                {proyeccionMinimo.cumpleMinimo ? cop(proyeccionMinimo.pensionEstimada) : "—"}
+                {proyeccionFinal.cumpleMinimo ? cop(proyeccionFinal.pensionEstimada) : "—"}
               </div>
               <div className={styles.scenarioTasa}>
-                {proyeccionMinimo.cumpleMinimo
-                  ? `Tasa de reemplazo estimada: ${proyeccionMinimo.tasa.toFixed(1)}%`
+                {proyeccionFinal.cumpleMinimo
+                  ? `Tasa de reemplazo estimada: ${proyeccionFinal.tasa.toFixed(1)}%`
                   : "No alcanzas las semanas mínimas con este escenario."}
               </div>
             </div>
           </div>
 
-          <div style={{ paddingTop: "0.2in" }}>
+          <div style={{ paddingTop: "0.05in" }}>
             <WhatsAppButton mensaje={pensionMsg} className={styles.btnWa}>
               Hablar con un asesor sobre mi pensión
             </WhatsAppButton>

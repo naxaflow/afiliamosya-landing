@@ -164,7 +164,7 @@ export default function Page() {
               pensionarías si sigues cotizando desde donde estás.
             </p>
           </Reveal>
-          <div style={{ marginTop: 32 }}>
+          <div style={{ marginTop: "calc(32px + 0.65in)" }}>
             <Reveal delay={150} as="div" className={calcPageStyles.card}>
               <Calculadora defaultExterior showAportes={false} />
             </Reveal>
