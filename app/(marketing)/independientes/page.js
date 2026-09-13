@@ -2,6 +2,7 @@ import Image from "next/image";
 import ServicioPage from "@/components/ServicioPage";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Reveal from "@/components/Reveal";
+import PremiumTrialModal from "@/components/PremiumTrialModal";
 import homeStyles from "@/components/Home.module.css";
 import styles from "@/components/ServicioPage.module.css";
 
@@ -211,6 +212,8 @@ export default function Page() {
           </div>
         </section>
       </div>
+
+      <PremiumTrialModal />
     </>
   );
 }

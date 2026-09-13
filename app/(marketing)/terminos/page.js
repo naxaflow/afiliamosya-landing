@@ -47,7 +47,29 @@ export default function Page() {
             en tu cotización personalizada.
           </p>
 
-          <h2>4. Uso del sitio</h2>
+          <h2>4. Promoción &quot;Afíliate hoy con descuento de hasta 100%&quot;</h2>
+          <p>
+            Esta promoción aplica de forma distinta según el tipo de vinculación:
+          </p>
+          <p>
+            <strong>Trabajadores dependientes:</strong> el descuento del 100% (afiliación
+            gratuita) aplica únicamente para personas que se afilien como dependientes bajo la
+            razón social de ¡Afiliamos Ya! / Multiservice Colombia.
+          </p>
+          <p>
+            <strong>Trabajadores independientes:</strong> el beneficio consiste en 1 mes de
+            prueba gratuita (trial) de la membresía ¡Afiliamos Ya! Premium, condicionado a que
+            se asocie una tarjeta de pago válida al momento de adquirir la membresía. Finalizado
+            el mes de prueba, se cobrará automáticamente el valor vigente de la membresía, salvo
+            que se cancele antes de esa fecha.
+          </p>
+          <p>
+            Esta promoción es por tiempo limitado, no es acumulable con otros descuentos, y
+            puede ser modificada o finalizada por ¡Afiliamos Ya! en cualquier momento sin previo
+            aviso.
+          </p>
+
+          <h2>5. Uso del sitio</h2>
           <p>
             Te comprometes a usar este sitio de forma lícita y a suministrar
             información veraz en los formularios de contacto y afiliación. Nos
@@ -55,21 +77,21 @@ export default function Page() {
             continuar con cualquier proceso de gestión.
           </p>
 
-          <h2>5. Canales de contacto</h2>
+          <h2>6. Canales de contacto</h2>
           <p>
             El canal principal de atención es WhatsApp, al número {PHONE_DISPLAY}.
             También puedes escribirnos a <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
             Buscamos responder en menos de 30 minutos en horario hábil.
           </p>
 
-          <h2>6. Propiedad intelectual</h2>
+          <h2>7. Propiedad intelectual</h2>
           <p>
             El contenido de este sitio — textos, logo, diseño y demás elementos
             gráficos — es propiedad de ¡Afiliamos Ya! / Multiservice Colombia y no
             puede reproducirse sin autorización previa.
           </p>
 
-          <h2>7. Limitación de responsabilidad</h2>
+          <h2>8. Limitación de responsabilidad</h2>
           <p>
             ¡Afiliamos Ya! no es responsable por cambios normativos posteriores a la
             publicación de este sitio que afecten los valores de referencia
@@ -77,13 +99,13 @@ export default function Page() {
             Cajas de Compensación tomen de forma autónoma sobre tu afiliación.
           </p>
 
-          <h2>8. Modificaciones</h2>
+          <h2>9. Modificaciones</h2>
           <p>
             Podemos actualizar estos términos en cualquier momento. La versión
             vigente siempre estará disponible en esta página.
           </p>
 
-          <h2>9. Ley aplicable</h2>
+          <h2>10. Ley aplicable</h2>
           <p>
             Estos términos se rigen por las leyes de la República de Colombia.
           </p>

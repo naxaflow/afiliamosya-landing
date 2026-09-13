@@ -1,14 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import CountrySelect from "./CountrySelect";
 import leadStyles from "./LeadForm.module.css";
 import styles from "./WelcomeOfferModal.module.css";
 
 const SHOW_DELAY_MS = 1500;
+// La página de Independientes tiene su propio popup (PremiumTrialModal, con la
+// oferta del mes gratis de Premium) — no mostrar también este ahí.
+const EXCLUDED_PATHS = ["/independientes"];
 
 export default function WelcomeOfferModal() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [estado, setEstado] = useState("idle"); // 'idle' | 'enviando' | 'ok' | 'error'
   const [errorMsg, setErrorMsg] = useState("");
@@ -84,6 +90,7 @@ export default function WelcomeOfferModal() {
     }
   }
 
+  if (EXCLUDED_PATHS.includes(pathname)) return null;
   if (!open) return null;
 
   return (
@@ -110,11 +117,14 @@ export default function WelcomeOfferModal() {
             </span>
             <h2 className={styles.title}>
               Afíliate hoy con descuento de hasta{" "}
-              <span className={styles.titleAccent}>100%</span>
+              <span className={styles.titleAccent}>100%*</span>
             </h2>
             <p className={styles.subtitle}>
               Déjanos tus datos y un asesor te contacta para contarte cómo acceder al descuento.
             </p>
+            <Link href="/terminos" target="_blank" className={styles.termsNote}>
+              *Aplican términos y condiciones
+            </Link>
 
             <input
               type="text"

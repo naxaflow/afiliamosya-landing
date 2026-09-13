@@ -276,23 +276,29 @@ export default function HomePage() {
       </div>
 
       <section className={styles.section} style={{ minHeight: "680px" }}>
-        <Reveal>
-          <span className={styles.eyebrow} style={{ color: "var(--color-primary)" }}>Cómo pagas</span>
-          <h2 className={styles.h2}>Paga tu planilla fácil</h2>
-          <p className={styles.sub}>
-            Con nuestro operador de pagos, ASOPAGOS S.A., y los medios que ya usas
-            todos los días.
+        <Reveal style={{ textAlign: "center" }}>
+          <span className={styles.eyebrow} style={{ color: "var(--color-primary)" }}>Operadores de Pago</span>
+          <h2 className={styles.h2} style={{ marginLeft: "auto", marginRight: "auto" }}>
+            Paga tu planilla fácil
+          </h2>
+          <p className={styles.sub} style={{ marginLeft: "auto", marginRight: "auto" }}>
+            Trabajamos con operadores de pago autorizados, que garantizan que cada aporte se
+            procese de forma segura y conforme a la ley.
           </p>
         </Reveal>
         <Reveal delay={150} className={styles.pagos}>
           {/* eslint-disable-next-line @next/next/no-img-element -- logos de socios, estáticos y livianos, no necesitan el pipeline de optimización */}
-          <img src="/logos/asopagos.png" alt="Asopagos S.A." />
+          <img src="/logos/aportes-en-linea.png" alt="Aportes en Línea" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logos/pse.jpg" alt="PSE" style={{ borderRadius: "50%" }} />
+          <img src="/logos/soi.png" alt="ACH SOI" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logos/nequi.svg" alt="Nequi" />
+          <img src="/logos/miplanilla.png" alt="MiPlanilla.com" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logos/efecty.png" alt="Efecty" />
+          <img src="/logos/asopagos-v2.png" alt="Asopagos S.A." />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logos/arus.png" alt="ARUS" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logos/simple.png" alt="Simple" />
         </Reveal>
 
         <Reveal delay={150} className={styles.faqIntro}>

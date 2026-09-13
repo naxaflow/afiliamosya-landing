@@ -12,12 +12,13 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 36px;
+  justify-content: center;
+  gap: 44px;
   margin-top: 28px;
 }
 
 .pagos img {
-  height: 32px;
+  height: 48px;
   width: auto;
   object-fit: contain;
 }

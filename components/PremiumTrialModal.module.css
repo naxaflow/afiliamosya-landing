@@ -13,13 +13,14 @@
 .dialog {
   position: relative;
   width: 100%;
-  max-width: 340px;
+  max-width: 360px;
   max-height: calc(100vh - 48px);
   overflow-y: auto;
-  background: #000;
-  border-radius: 16px;
-  padding: 24px 20px 20px;
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+  background: var(--color-primary);
+  border-radius: 18px;
+  padding: 32px 26px 26px;
+  text-align: center;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.4);
   animation: pop 0.25s ease;
 }
 
@@ -31,7 +32,7 @@
   height: 32px;
   border-radius: 999px;
   border: none;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.16);
   color: #fff;
   font-size: 1.1rem;
   line-height: 1;
@@ -42,71 +43,82 @@
 }
 
 .close:hover {
-  background: rgba(255, 255, 255, 0.22);
-  color: #fff;
+  background: rgba(0, 0, 0, 0.28);
 }
 
 .badge {
-  display: block;
-  width: fit-content;
-  margin: 0 auto;
-  text-align: center;
-  background: rgba(255, 119, 0, 0.16);
-  border: 1px solid rgba(255, 119, 0, 0.4);
-  color: var(--color-primary);
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
   font-family: var(--font-sequel);
   font-weight: 900;
-  font-size: 0.78rem;
-  line-height: 1.4;
+  font-size: 0.72rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  border-radius: 14px;
-  padding: 8px 16px;
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+.logo {
+  margin-top: 20px;
+}
+
+.logoTitle {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.7rem;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.logoWord {
+  display: block;
+  font-family: var(--font-sequel);
+  font-weight: 900;
+  font-size: 1.9rem;
+  color: var(--color-ink);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-top: 2px;
 }
 
 .title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.25rem, 6vw, 1.5rem);
+  font-size: clamp(1.2rem, 5vw, 1.4rem);
   color: #fff;
-  margin-top: 12px;
-  line-height: 1.15;
-}
-
-.titleAccent {
-  color: var(--color-primary);
+  margin-top: 16px;
+  line-height: 1.25;
 }
 
 .subtitle {
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 255, 255, 0.85);
   margin-top: 10px;
   font-family: var(--font-body);
-  font-size: 0.96rem;
+  font-size: 0.94rem;
+  line-height: 1.4;
+}
+
+.cta {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
 }
 
 .termsNote {
   display: block;
-  margin-top: 8px;
+  margin-top: 12px;
   font-family: var(--font-body);
-  font-size: 0.74rem;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: underline;
 }
 
 .termsNote:hover {
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.thanksTitle {
-  color: var(--color-primary);
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-}
-
-.thanksText {
-  color: rgba(255, 255, 255, 0.72);
-  margin-top: 12px;
-  font-family: var(--font-body);
+  color: #fff;
 }
 
 @keyframes fadeIn {
@@ -126,11 +138,5 @@
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
-  }
-}
-
-@media (max-width: 480px) {
-  .dialog {
-    padding: 30px 22px 26px;
   }
 }
