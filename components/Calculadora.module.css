@@ -241,36 +241,6 @@
   margin-top: 16px;
 }
 
-.avoidFeeBox {
-  margin-top: 18px;
-  text-align: center;
-}
-
-.avoidFeeBox p {
-  font-size: 0.86rem;
-  color: var(--color-gray);
-  font-family: var(--font-body);
-  margin: 0 0 8px;
-}
-
-.avoidFeeLink {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  font-weight: 700;
-  font-size: 0.94rem;
-  border-radius: 999px;
-  padding: 0.85rem 1.5rem;
-  color: var(--color-ink);
-  border: 1.5px solid var(--color-gray-light);
-}
-
-.avoidFeeLink:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary-deep);
-}
-
 .helpBox {
   margin-top: 24px;
   text-align: center;

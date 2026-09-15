@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
 import {
   SMMLV,
   cop,
@@ -524,30 +523,20 @@ export default function Calculadora({
           {usdError && <div className={styles.usdErrorMsg}>{usdError}</div>}
         </div>
         </div>
+        <div className={styles.note}>
+          Este valor corresponde al pago de tu planilla — no incluye el valor de nuestra
+          gestión. Si deseas pagar tu gestión con descuento a través de la membresía
+          ¡Afiliamos Ya! Premium, escríbenos al WhatsApp.
+        </div>
         {esDias76 && (
-          <>
-            <div className={styles.note}>
-              Este valor corresponde al pago de tu planilla — no incluye el valor de
-              nuestra gestión. Si deseas pagar tu gestión con descuento a través de la
-              membresía ¡Afiliamos Ya! Premium, escríbenos al WhatsApp.
-            </div>
-            <div className={styles.note}>
-              Cotizante 76 — trabajador de tiempo parcial independiente. Verifica siempre
-              la normativa y parametrización vigente del operador PILA antes de pagar.
-            </div>
-          </>
+          <div className={styles.note}>
+            Cotizante 76 — trabajador de tiempo parcial independiente. Verifica siempre
+            la normativa y parametrización vigente del operador PILA antes de pagar.
+          </div>
         )}
         <WhatsAppButton mensaje={cotizaMsg} className={styles.btnWa}>
           Recibir mi cotización exacta
         </WhatsAppButton>
-        {!esDias76 && (
-          <div className={styles.avoidFeeBox}>
-            <p>¿Quieres evitar pagar el valor de gestión?</p>
-            <Link href="/independientes" className={styles.avoidFeeLink}>
-              Conoce ¡Afiliamos Ya! Premium
-            </Link>
-          </div>
-        )}
       </div>
     </div>
     )}
