@@ -525,10 +525,17 @@ export default function Calculadora({
         </div>
         </div>
         {esDias76 && (
-          <div className={styles.note}>
-            Cotizante 76 — trabajador de tiempo parcial independiente. Verifica siempre
-            la normativa y parametrización vigente del operador PILA antes de pagar.
-          </div>
+          <>
+            <div className={styles.note}>
+              Este valor corresponde al pago de tu planilla — no incluye el valor de
+              nuestra gestión. Si deseas pagar tu gestión con descuento a través de la
+              membresía ¡Afiliamos Ya! Premium, escríbenos al WhatsApp.
+            </div>
+            <div className={styles.note}>
+              Cotizante 76 — trabajador de tiempo parcial independiente. Verifica siempre
+              la normativa y parametrización vigente del operador PILA antes de pagar.
+            </div>
+          </>
         )}
         <WhatsAppButton mensaje={cotizaMsg} className={styles.btnWa}>
           Recibir mi cotización exacta
