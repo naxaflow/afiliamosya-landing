@@ -21,7 +21,7 @@ const TIPOS_COTIZANTE = [
   {
     value: "03",
     label: "Independiente por cuenta propia (Tipo 03)",
-    nota: "Trabajas por cuenta propia. Incluye Salud siempre; Pensión es opcional — este tipo no incluye ARL.",
+    nota: "Trabajas por cuenta propia. Salud y Pensión son opcionales — este tipo no incluye ARL.",
   },
   {
     value: "57",
@@ -79,13 +79,13 @@ export default function Calculadora({
   const [loadingUsd, setLoadingUsd] = useState(false);
   const [usdError, setUsdError] = useState("");
 
-  // Tipos 03 y 73 siempre incluyen Salud sin ARL. El tipo 57 siempre
-  // incluye ARL, y deja Salud y Pensión como opcionales (checkbox).
-  // Pensión es opcional (checkbox) en el tipo 03, igual que en el 59.
-  // El tipo 73 siempre incluye Pensión, y deja ARL como opcional
-  // (checkbox) con riesgo fijo en III. El tipo 59 (o exterior/completo)
-  // deja que el usuario elija todo con los checks.
-  const effSalud = es03 || es73 ? true : salud;
+  // El tipo 73 siempre incluye Salud y Pensión sin ARL propio (deja ARL
+  // como opcional con riesgo fijo en III). El tipo 57 siempre incluye
+  // ARL, y deja Salud y Pensión como opcionales (checkbox). El tipo 03
+  // no incluye ARL, y deja Salud y Pensión como opcionales (checkbox),
+  // igual que en el 59. El tipo 59 (o exterior/completo) deja que el
+  // usuario elija todo con los checks.
+  const effSalud = es73 ? true : salud;
   const effPension = es73 ? true : pension;
   const effArl = es57 ? true : es03 ? false : arl;
   const effRiesgo = es73 ? "III" : riesgo;
@@ -101,7 +101,7 @@ export default function Calculadora({
 
   const diasNum = Math.min(30, Math.max(0, Number(dias) || 0));
   const r76 = useMemo(
-    () => liquidarCotizante76({ dias: diasNum, riesgo, cajaRate, salud: true, pension, arl }),
+    () => liquidarCotizante76({ dias: diasNum, riesgo, cajaRate, salud: false, pension, arl }),
     [diasNum, riesgo, cajaRate, pension, arl]
   );
 
@@ -230,7 +230,6 @@ export default function Calculadora({
             </div>
 
             <label className={styles.label}>¿Qué incluye tu aporte?</label>
-            <div className={styles.note}>Salud (12,5%) — obligatoria en este tipo.</div>
             <label className={styles.check}>
               <input type="checkbox" checked={pension} onChange={(e) => setPension(e.target.checked)} />
               Pensión (16%)
@@ -313,7 +312,7 @@ export default function Calculadora({
             )}
 
             <label className={styles.label}>¿Qué incluye tu aporte?</label>
-            {(es59 || es57) && !exterior && (
+            {(es59 || es57 || es03) && !exterior && (
               <label className={styles.check}>
                 <input
                   type="checkbox"
@@ -323,7 +322,7 @@ export default function Calculadora({
                 Salud (12,5%) — obligatoria para el independiente
               </label>
             )}
-            {(es03 || es73) && (
+            {es73 && (
               <div className={styles.note}>Salud (12,5%) — incluida siempre en este tipo.</div>
             )}
             {(es59 || es03 || es57) && (
