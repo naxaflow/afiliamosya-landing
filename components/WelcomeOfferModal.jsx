@@ -10,8 +10,9 @@ import styles from "./WelcomeOfferModal.module.css";
 
 const SHOW_DELAY_MS = 1500;
 // La página de Independientes tiene su propio popup (PremiumTrialModal, con la
-// oferta del mes gratis de Premium) — no mostrar también este ahí.
-const EXCLUDED_PATHS = ["/independientes"];
+// oferta del mes gratis de Premium) — no mostrar también este ahí. Tampoco se
+// muestra en Términos y Condiciones.
+const EXCLUDED_PATHS = ["/independientes", "/terminos"];
 
 export default function WelcomeOfferModal() {
   const pathname = usePathname();

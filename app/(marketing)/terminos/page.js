@@ -49,24 +49,84 @@ export default function Page() {
 
           <h2>4. Promoción &quot;Afíliate hoy con descuento de hasta 100%&quot;</h2>
           <p>
-            Esta promoción aplica de forma distinta según el tipo de vinculación:
+            La promoción &quot;Afíliate hoy con descuento de hasta 100%&quot; ofrece beneficios
+            diferentes según el tipo de vinculación del usuario. Los beneficios promocionales
+            se aplican exclusivamente en los términos y condiciones establecidos para cada
+            modalidad.
+          </p>
+
+          <h3>4.1. Trabajadores dependientes</h3>
+          <p>
+            Para las personas que se vinculen como dependientes, el beneficio consiste en un
+            descuento del 100% sobre el valor correspondiente al trámite inicial de afiliación
+            realizado a través de nuestra entidad.
           </p>
           <p>
-            <strong>Trabajadores dependientes:</strong> el descuento del 100% (afiliación
-            gratuita) aplica únicamente para personas que se afilien como dependientes bajo la
-            razón social de ¡Afiliamos Ya! / Multiservice Colombia.
+            Este beneficio comprende exclusivamente las gestiones administrativas
+            relacionadas con el proceso de afiliación que se realizan durante el primer mes de
+            vinculación.
           </p>
           <p>
-            <strong>Trabajadores independientes:</strong> el beneficio consiste en 1 mes de
-            prueba gratuita (trial) de la membresía ¡Afiliamos Ya! Premium, condicionado a que
-            se asocie una tarjeta de pago válida al momento de adquirir la membresía. Finalizado
-            el mes de prueba, se cobrará automáticamente el valor vigente de la membresía, salvo
-            que se cancele antes de esa fecha.
+            El descuento no comprende los aportes al Sistema de Seguridad Social que
+            correspondan al cotizante, ni los valores que deban ser pagados a las entidades a
+            las cuales se encuentre afiliado el cotizante, tales como EPS, ARL y fondo de
+            pensiones, entre otras.
           </p>
           <p>
-            Esta promoción es por tiempo limitado, no es acumulable con otros descuentos, y
-            puede ser modificada o finalizada por ¡Afiliamos Ya! en cualquier momento sin previo
-            aviso.
+            Por lo tanto, a partir de los períodos siguientes al mes inicial de afiliación,
+            los pagos correspondientes a las entidades del Sistema de Seguridad Social
+            deberán realizarse conforme a los valores y tarifas que correspondan en cada
+            período. El beneficio del 100% no se extiende a dichos pagos ni a los meses
+            posteriores.
+          </p>
+
+          <h3>4.2. Trabajadores independientes</h3>
+          <p>
+            Para las personas que se vinculen como trabajadores independientes, el beneficio
+            promocional consiste en un (1) mes de prueba gratuita del servicio
+            administrativo/membresía ¡Afiliamos Ya! Premium.
+          </p>
+          <p>
+            El beneficio aplica únicamente sobre el valor del servicio administrativo o
+            membresía durante el primer mes de prueba.
+          </p>
+          <p>
+            El mes gratuito no significa que la persona quede exonerada del pago de sus
+            aportes a la Seguridad Social. Los valores correspondientes a la planilla y a los
+            aportes que deban pagarse a las entidades del Sistema de Seguridad Social,
+            incluyendo salud, pensión y riesgos laborales cuando corresponda, no están
+            incluidos dentro del beneficio promocional y deberán ser asumidos por el afiliado
+            conforme a la liquidación correspondiente.
+          </p>
+          <p>
+            Para acceder al mes de prueba gratuito, el usuario deberá asociar una tarjeta de
+            pago válida al momento de adquirir la membresía.
+          </p>
+          <p>
+            Una vez finalizado el período gratuito de un (1) mes, se cobrará automáticamente
+            el valor vigente de la membresía ¡Afiliamos Ya! Premium, de acuerdo con las
+            condiciones aceptadas al momento de la contratación, salvo que el usuario cancele
+            la membresía antes de finalizar dicho período de prueba.
+          </p>
+
+          <h3>4.3. Alcance del beneficio</h3>
+          <p>
+            Los descuentos y beneficios descritos en esta promoción se aplican únicamente a
+            los conceptos expresamente indicados en estos términos y condiciones.
+          </p>
+          <p>
+            En ningún caso el descuento promocional deberá interpretarse como una exoneración
+            del pago de los aportes obligatorios al Sistema de Seguridad Social o de los
+            valores que deban ser pagados a las entidades administradoras correspondientes.
+          </p>
+          <p>
+            Los valores de los aportes a Seguridad Social pueden variar de acuerdo con la
+            situación particular del afiliado, el ingreso base de cotización, la actividad
+            desarrollada, el nivel de riesgo y las disposiciones aplicables en cada período.
+          </p>
+          <p>
+            La aceptación de la promoción implica el conocimiento y aceptación de las
+            condiciones aquí descritas.
           </p>
 
           <h2>5. Uso del sitio</h2>
