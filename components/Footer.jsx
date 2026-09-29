@@ -19,6 +19,14 @@ export default function Footer() {
           <span className={styles.tagline}>Tu Seguridad Social, nuestra gestión.</span>
         </div>
         <div className={styles.legal}>
+          <a
+            href="https://siscoopweb.vercel.app/login"
+            target="_blank"
+            rel="noreferrer"
+            className={styles.loginBtn}
+          >
+            Log In
+          </a>
           <Link href="/privacidad">Privacidad</Link>
           <Link href="/terminos">Términos</Link>
         </div>
