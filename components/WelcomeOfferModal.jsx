@@ -24,12 +24,13 @@ export default function WelcomeOfferModal() {
   const [montadoEn] = useState(() => Date.now());
 
   useEffect(() => {
+    if (EXCLUDED_PATHS.includes(pathname)) return;
     const t = setTimeout(() => setOpen(true), SHOW_DELAY_MS);
     return () => clearTimeout(t);
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
-    if (!open) return;
+    if (!open || EXCLUDED_PATHS.includes(pathname)) return;
     document.body.style.overflow = "hidden";
     function onKeyDown(e) {
       if (e.key === "Escape") close();
@@ -39,7 +40,7 @@ export default function WelcomeOfferModal() {
       document.body.style.overflow = "";
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [open]);
+  }, [open, pathname]);
 
   function close() {
     setOpen(false);
